@@ -7,6 +7,7 @@ In order to run this solution, you would need to:
  1. Install .NETCore 2.2
  2. Install the Wide World Importers database
 	2.1 Download the [**WideWorldImporters-Standard.bak**](https://github.com/Microsoft/sql-server-samples/releases/download/wide-world-importers-v1.0/WideWorldImporters-Standard.bak) backup database in order to restore it from this [site](https://github.com/Microsoft/sql-server-samples/releases/tag/wide-world-importers-v1.0).
+3. Compile the application stored procedures in Infrastructure.Database.SQL.StoredProcedures
  3. Update the EFCore connection string in the appsettings file.
 
 ## Technologies and tools
