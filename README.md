@@ -26,6 +26,12 @@ The following NugetPackages are used:
  - Serilog.Sinks.Async is used to log asynchronously
  - Serilog.Sinks.RollingFile allows me to easily setup the rolling log file.
 
+
+
+Notice that we are sending a parameter type to the logger methods. This allows us to send in as many parameters as are needed to be logged as illustrated by the following interface contract:
+
+    void LogError(Exception ex, params object[] data);
+
 #### Entity Framework Core
 Being a .NETCore solution, EFCore is being used.
 #### AutoMapper
