@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Application.Shared;
 using Application.UseCases.GetClientOrders;
+using Application.UseCases.SearchCustomerByName;
 using AutoMapper;
 using Infrastructure.Database.Context;
+using Infrastructure.Database.Repo.Customer;
 using Infrastructure.Database.Repo.Orders;
 using Infrastructure.Log;
 using Microsoft.AspNetCore.Builder;
@@ -63,6 +66,11 @@ namespace WebUi
             services.AddScoped<IDataLogger, DataLogger>();
             services.AddTransient<IClientOrders, ClientOrders>();
             services.AddTransient<IClientOrder, ClientOrder>();
+            services.AddTransient<IOrderRepo, OrderRepo>();
+            services.AddTransient<IClientOrderAuthorization, ClientOrderAuthorization>();
+
+            services.AddTransient<ICustomerSearchRepo, CustomerSearchRepo>();
+            services.AddTransient<ICustomerSearch, CustomerSearch>();
 
             AddSerilogServices(services);
         }

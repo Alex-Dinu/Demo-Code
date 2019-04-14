@@ -1,5 +1,7 @@
 ﻿using Application.UseCases.GetClientOrders;
+using Application.UseCases.SearchCustomerByName;
 using AutoMapper;
+using Infrastructure.Database.Repo.Customer;
 using Infrastructure.Database.Repo.Orders;
 using System;
 using System.Collections.Generic;
@@ -15,24 +17,11 @@ namespace WebUi.Shared
         {
             CreateMap<ClientOrderRepoResponseModel, ClientOrderApplicationResponseModel>();
 
-
-            //CreateMap<Foo, Bar>().ForMember(x => x.Blarg, opt => opt.Ignore());
-
-
-            //     Mapper.CreateMap<MoveEntity, MoveEntityDto>()
-            //.ForMember(dest => dest.PrimaryOriginTransferee, opt => opt.Ignore())
-            //.ForMember(dest => dest.PrimaryDestinationTransferee, opt => opt.Ignore())
-            //.ForMember(dest => dest.Customer, opt => opt.Ignore())
-            //.ForMember(dest => dest.DestinationAddress, opt => opt.Ignore())
-            //.ForMember(dest => dest.OriginAddress, opt => opt.Ignore())
-            //.ForMember(dest => dest.Order, opt => opt.Ignore())
-            //.ForMember(dest => dest.Shipment, opt => opt.Ignore())
-            //.ForMember(dest => dest.SourceSystemName, opt => op
-
-
             CreateMap<ClientOrderApplicationResponseModel, ClientOrderServiceResponseModel>();
 
+            CreateMap<OrderRepoResponse, OrderRepoResponse>();
 
+            CreateMap<CustomerSearchRepoResponseModel, CustomerSearchApplicationResponseModel>();
         }
 
 

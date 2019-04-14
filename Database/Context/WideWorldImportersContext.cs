@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Infrastructure.Database.Repo.Customer;
 using Infrastructure.Database.Repo.Orders;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,6 +10,9 @@ namespace Infrastructure.Database.Context
     public partial class WideWorldImportersContext :DbContext
     {
         public virtual DbSet<ClientOrderRepoResponseModel> ClientOrders { get; set; }
+        public virtual DbSet<OrderRepoResponse> Order { get; set; }
+
+        public virtual DbSet<CustomerSearchRepoResponseModel> CustomerSearch { get; set; }
 
         public WideWorldImportersContext()
         {
