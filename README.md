@@ -42,6 +42,9 @@ Mapper rules are setup in WebUi.Shared.DataMapper class and is added as a servic
 I use XUnit to run my tests.
 
 ### MVC
+#### Return types
+We can now explicitly return the type of the action. In the past, we used to return ActionResult, but now we can explicitly say what the type is, e.g. Task<ActionResult<CustomerSearchMvcResponseModel>>.
+	
 #### Custom Validators
 I added a custom validator attribute to showcase how we can pass the existing property we need to validate and anotherproperty value into the validator. The validator code can be found in WebUi.CustomValidatorAttributes.ValidLogonAttribute and is used as follows:
 
