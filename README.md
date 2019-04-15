@@ -14,7 +14,8 @@ In order to run this solution, you would need to:
 ### Architecture
 Although the solution is not strictly [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html), it does implement the basic principles. I did take some shortcuts in order to make it easier to follow and try it out.
 
-### .NET Core tools and packages
+## .NET Core
+### Tools and packages
 #### Logger
 I use [Serilog](https://serilog.net/) in order to help me log information and errors in JSON format in a daily rolling file with a max size.
 
@@ -41,7 +42,13 @@ Mapper rules are setup in WebUi.Shared.DataMapper class and is added as a servic
 #### XUnit
 I use XUnit to run my tests.
 
-### MVC
+## MVC/API
+### Middleware
+We use [middleware](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/middleware/?view=aspnetcore-2.2) to manage the request pipeline.
+#### Request\Response logger
+This middleware automatically logs the request values and the response, It can be found in WebUi.Middleware.RequestResponseLoggingMiddleware.cs
+#### Unhandled Exception middleware
+This middleware will catch any unhandled exceptions, build a custom response and return it so we won't return any secure information just in case someone missed a try\catch.
 #### Return types
 We can now explicitly return the type of the action. In the past, we used to return ActionResult, but now we can explicitly say what the type is, e.g. Task<ActionResult<CustomerSearchMvcResponseModel>>.
 	
