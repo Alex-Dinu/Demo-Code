@@ -52,3 +52,15 @@ I added a custom validator attribute to showcase how we can pass the existing pr
         public string LogonName { get; set; }
 	
 As you can see, we are validating the LogonName against the PreferredName. 
+#### Remote Validations
+[Remote validations](https://docs.microsoft.com/en-us/aspnet/core/mvc/models/validation?view=aspnetcore-2.2#remote-attribute) perform an asynchronous call to the server to perform a validation while the client continues to fill out the form. For example, if an email address has to be unique, once they tab away from the input, and continue to fill out the form, an AJAX call is made to make sure the field is not already in use.
+The validation code can be found in EmployeeManagement.Controllers.EmployeesController.CheckIfEmailAlreadyExists() method and is setup as an attribute on the property:
+
+        [Remote("CheckIfEmailAlreadyExists", "Employees", ErrorMessage = "Email already exists")]
+        public string EmailAddress { get; set; }
+	
+The first parameter is the action an the second is the controller.
+
+
+
+
