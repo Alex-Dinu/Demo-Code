@@ -14,7 +14,8 @@ In order to run this solution, you would need to:
 ### Architecture
 Although the solution is not strictly [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html), it does implement the basic principles. I did take some shortcuts in order to make it easier to follow and try it out.
 
-### .NET Core tools and packages
+## .NET Core
+### Tools and packages
 #### Logger
 I use [Serilog](https://serilog.net/) in order to help me log information and errors in JSON format in a daily rolling file with a max size.
 
@@ -40,3 +41,37 @@ AutoMapper is a library I use to map the different data objects that are passed 
 Mapper rules are setup in WebUi.Shared.DataMapper class and is added as a service in Startup.cs.
 #### XUnit
 I use XUnit to run my tests.
+
+## MVC/API
+### Middleware
+We use [middleware](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/middleware/?view=aspnetcore-2.2) to manage the request pipeline. Any classes that the middleware require need to be added to the container in Startup.cs and we need to also add the middleware to the application also in Startup.Configure() method.
+#### Request\Response logger
+This middleware automatically logs the request values and the response, It can be found in WebUi.Middleware.RequestResponseLoggingMiddleware.cs
+#### Unhandled Exception middleware
+This middleware will catch any unhandled exceptions, build a custom response and return it so we won't return any secure information just in case someone missed a try\catch.
+### Responses
+#### Return types
+We can now explicitly return the type of the action. In the past, we used to return ActionResult, but now we can explicitly say what the type is, e.g. Task<ActionResult<CustomerSearchMvcResponseModel>>.
+### Validators	
+#### Custom Validators
+I added a custom validator attribute to showcase how we can pass the existing property we need to validate and anotherproperty value into the validator. The validator code can be found in WebUi.CustomValidatorAttributes.ValidLogonAttribute and is used as follows:
+
+        [DisplayName("Preferred Name")]
+        public string PreferredName { get; set; }
+        [DisplayName("Logon Name")]
+        [ValidLogon("PreferredName", ErrorMessage = "Invalid Logon")]
+        public string LogonName { get; set; }
+	
+As you can see, we are validating the LogonName against the PreferredName. 
+#### Remote Validations
+[Remote validations](https://docs.microsoft.com/en-us/aspnet/core/mvc/models/validation?view=aspnetcore-2.2#remote-attribute) perform an asynchronous call to the server to perform a validation while the client continues to fill out the form. For example, if an email address has to be unique, once they tab away from the input, and continue to fill out the form, an AJAX call is made to make sure the field is not already in use.
+The validation code can be found in EmployeeManagement.Controllers.EmployeesController.CheckIfEmailAlreadyExists() method and is setup as an attribute on the property:
+
+        [Remote("CheckIfEmailAlreadyExists", "Employees", ErrorMessage = "Email already exists")]
+        public string EmailAddress { get; set; }
+	
+The first parameter is the action an the second is the controller.
+
+
+
+
