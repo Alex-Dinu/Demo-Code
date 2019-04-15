@@ -44,7 +44,7 @@ I use XUnit to run my tests.
 
 ## MVC/API
 ### Middleware
-We use [middleware](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/middleware/?view=aspnetcore-2.2) to manage the request pipeline.
+We use [middleware](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/middleware/?view=aspnetcore-2.2) to manage the request pipeline. Any classes that the middleware require need to be added to the container in Startup.cs and we need to also add the middleware to the application also in Startup.Configure() method.
 #### Request\Response logger
 This middleware automatically logs the request values and the response, It can be found in WebUi.Middleware.RequestResponseLoggingMiddleware.cs
 #### Unhandled Exception middleware
