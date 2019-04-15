@@ -16,6 +16,9 @@ namespace Infrastructure.Database.Repo.Customer
         public string FullName { get; set; }
         public string PreferredName { get; set; }
         public string LogonName { get; set; }
+        public string EmailAddress { get; set; }
+        public DateTime HireDate { get; set; }
+
 
     }
 }

@@ -18,6 +18,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
+using WebUi.Middleware;
+using WebUi.Middleware.ExceptionResponse;
 
 namespace WebUi
 {
@@ -72,6 +74,8 @@ namespace WebUi
             services.AddTransient<ICustomerSearchRepo, CustomerSearchRepo>();
             services.AddTransient<ICustomerSearch, CustomerSearch>();
 
+            services.AddTransient<IExceptionResponse, ExceptionResponse>();
+
             AddSerilogServices(services);
         }
 
@@ -110,12 +114,20 @@ namespace WebUi
             app.UseStaticFiles();
             app.UseCookiePolicy();
 
+            AddMiddlewareApplications(app);
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+        }
+
+        private static void AddMiddlewareApplications(IApplicationBuilder app)
+        {
+            app.UseMiddleware<RequestResponseLoggingMiddleware>();
+            app.UseMiddleware<UnhandledExceptionHandlerMiddleware>();
         }
     }
 }

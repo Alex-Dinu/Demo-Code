@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebUi.Models;
 using WebUi.Services.Orders;
 
 namespace WebUi.Shared
@@ -22,6 +23,9 @@ namespace WebUi.Shared
             CreateMap<OrderRepoResponse, OrderRepoResponse>();
 
             CreateMap<CustomerSearchRepoResponseModel, CustomerSearchApplicationResponseModel>();
+
+            CreateMap<CustomerSearchApplicationResponseModel, CustomerSearchMvcResponseModel>();
+
         }
 
 
