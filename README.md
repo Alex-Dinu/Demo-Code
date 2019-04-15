@@ -49,9 +49,10 @@ We use [middleware](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/mi
 This middleware automatically logs the request values and the response, It can be found in WebUi.Middleware.RequestResponseLoggingMiddleware.cs
 #### Unhandled Exception middleware
 This middleware will catch any unhandled exceptions, build a custom response and return it so we won't return any secure information just in case someone missed a try\catch.
+### Responses
 #### Return types
 We can now explicitly return the type of the action. In the past, we used to return ActionResult, but now we can explicitly say what the type is, e.g. Task<ActionResult<CustomerSearchMvcResponseModel>>.
-	
+### Validators	
 #### Custom Validators
 I added a custom validator attribute to showcase how we can pass the existing property we need to validate and anotherproperty value into the validator. The validator code can be found in WebUi.CustomValidatorAttributes.ValidLogonAttribute and is used as follows:
 
