@@ -40,3 +40,15 @@ AutoMapper is a library I use to map the different data objects that are passed 
 Mapper rules are setup in WebUi.Shared.DataMapper class and is added as a service in Startup.cs.
 #### XUnit
 I use XUnit to run my tests.
+
+### MVC
+#### Custom Validators
+I added a custom validator attribute to showcase how we can pass the existing property we need to validate and anotherproperty value into the validator. The validator code can be found in WebUi.CustomValidatorAttributes.ValidLogonAttribute and is used as follows:
+
+        [DisplayName("Preferred Name")]
+        public string PreferredName { get; set; }
+        [DisplayName("Logon Name")]
+        [ValidLogon("PreferredName", ErrorMessage = "Invalid Logon")]
+        public string LogonName { get; set; }
+	
+As you can see, we are validating the LogonName against the PreferredName. 
