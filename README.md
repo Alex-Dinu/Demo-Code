@@ -1,14 +1,6 @@
 # Demo Code
 https://stackedit.io/app#
-The purpose of this repository is to showcase various tools, development principles, solution architecture and the usage of 3rd party tools that demonstrate my experience.
-
-## Download and Run 
-In order to run this solution, you would need to:
- 1. Install .NETCore 2.2
- 2. Install the Wide World Importers database
-	2.1 Download the [**WideWorldImporters-Standard.bak**](https://github.com/Microsoft/sql-server-samples/releases/download/wide-world-importers-v1.0/WideWorldImporters-Standard.bak) backup database in order to restore it from this [site](https://github.com/Microsoft/sql-server-samples/releases/tag/wide-world-importers-v1.0).
-3. Compile the application stored procedures in Infrastructure.Database.SQL.StoredProcedures
- 3. Update the EFCore connection string in the appsettings file.
+The purpose of this repository is to showcase various tools, development principles, solution architecture and the usage of 3rd party tools that demonstrate my experience. This demo code solution uses .NETCore 2.2.
 
 ## Technologies and tools
 ### Architecture
@@ -33,7 +25,12 @@ Notice that we are sending a parameter type to the logger methods. This allows u
     void LogError(Exception ex, params object[] data);
 
 #### Entity Framework Core
-Being a .NETCore solution, EFCore is being used.
+Being a .NETCore solution, EFCore is being used. While most of the demos do not require a database, some calls under the EFCore menu item do, so you would need to perform the following steps:
+
+ 1. Install the Wide World Importers database
+	1.1 Download the [**WideWorldImporters-Standard.bak**](https://github.com/Microsoft/sql-server-samples/releases/download/wide-world-importers-v1.0/WideWorldImporters-Standard.bak) backup database in order to restore it from this [site](https://github.com/Microsoft/sql-server-samples/releases/tag/wide-world-importers-v1.0).
+2. Compile the application stored procedures in Infrastructure.Database.SQL.StoredProcedures
+3. Update the EFCore connection string in the appsettings file.
 
 #### AutoMapper
 AutoMapper is a library I use to map the different data objects that are passed between the different layers in Clean Architecture solution.
@@ -72,14 +69,14 @@ The validation code can be found [here](https://github.com/Alex-Dinu/Demo-Code/b
 	
 The first parameter is the action an the second is the controller.
 
-##JQuery
+## JQuery
 
-###Closures
+### Closures
 [This](https://github.com/Alex-Dinu/Demo-Code/blob/master/WebUi/Views/Closures/Index.cshtml) is the source code. You can see it in action by running the site and selecting Closures from the JQUery menu.
 
-###Promises
+### Promises
 [This](https://github.com/Alex-Dinu/Demo-Code/blob/master/WebUi/Views/Promises/Index.cshtml) is the source code. You can see it in action by running the site and selecting Promises from the JQUery menu.
 
-###AJAX calls
+### AJAX calls
 This demonstrates a simple AJAX call to get some results from an API call. You can look at the code [here](https://github.com/Alex-Dinu/Demo-Code/blob/master/WebUi/Views/Address/Create.cshtml) and see it in action by running the site and selecting AJAX from the JQUery menu.
 
