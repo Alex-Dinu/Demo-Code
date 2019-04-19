@@ -4,7 +4,27 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Customers</h1>
+<article>
+    These set of pages demonstrate the usage of MVC validations. It implements the basic ones we implement via the standard attributes. <br />
+    But is also, more interestingly, implements Remote and Custom validations.<p></p>
+    <strong>Remote validations</strong> <p></p>
+    By decorating a property with the [Remote] attribute, we in effect implementing a client-side validation<br />
+    which requires the process to make a server-side call in order to validate the data.<br />
+    This gets done asynchronously and in the background without the user being aware except when the validation fails with a message.<br />
+    This validation is demonstrated by the rule that the phone number must be unique for every customer. Try entering a phone number [222.333.4444] to see the result.
+     <p style="color: orangered">Edit or Add New customer, enter 222.333.4444 as the address and tab away for the validation.</p>
+
+    <p></p>
+    <strong>Custom validations</strong> <p></p>
+    We can create our own custom validation attribute that not only can perform logic against the context property, <br />
+    but we can also pass in other properties that may be required for the validation.<br />
+    We perform a custom validation that makes sure that the logon is not the same as the preferred name.<br />
+
+    <p style="color: orangered">Edit a customer, and enter the logon name to be the same as the preferred name, resolve any other validations and submit the form to see the result.</p>
+
+
+</article>
+
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -37,35 +57,36 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.CustomerID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CustomerName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PhoneNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FaxNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FullName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PreferredName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LogonName)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { item.CustomerID }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CustomerID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CustomerName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PhoneNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FaxNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PreferredName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LogonName)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { item.CustomerID }) |
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

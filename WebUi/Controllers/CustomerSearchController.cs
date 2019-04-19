@@ -138,7 +138,7 @@ namespace WebUi.Controllers
         //}
 
         [AcceptVerbs("Get", "Post")]
-        public async Task<IActionResult> CheckIfLogonAlreadyExists(string phoneNumber)
+        public async Task<IActionResult> PhoneNumberIsUnique(string phoneNumber)
         {
             var customers = await GetCustomers(string.Empty);
             var customerWithTheSameLogon = customers.FirstOrDefault(c => c.PhoneNumber == phoneNumber);

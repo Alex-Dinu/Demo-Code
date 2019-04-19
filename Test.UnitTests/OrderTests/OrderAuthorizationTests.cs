@@ -5,6 +5,7 @@ using Application.Shared;
 using Application.Shared.Exceptions;
 using Application.UseCases.GetOrder;
 using Moq;
+using Newtonsoft.Json;
 using Xunit;
 
 
@@ -30,6 +31,8 @@ namespace Test.UnitTests.OrderTests
 
 
        }
+
+
 
     }
 }

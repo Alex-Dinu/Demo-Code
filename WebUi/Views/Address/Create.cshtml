@@ -4,9 +4,11 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
 
-<h4>CustomerAddressMvcRequestModel</h4>
+<article>
+    Enter Chicago as the city and tab away to see the weather.
+
+</article>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -22,6 +24,8 @@
                 <input asp-for="City" class="form-control" />
                 <span asp-validation-for="City" class="text-danger"></span>
             </div>
+            <span id="weather"></span>
+
             <div class="form-group">
                 <label asp-for="State" class="control-label"></label>
                 <input asp-for="State" class="form-control" />
@@ -53,7 +57,7 @@
                     //alert('q');
                     getChicagoWeather();
                     }
-                
+
             });
     });
 

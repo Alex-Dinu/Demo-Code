@@ -3,8 +3,18 @@
     ViewData["Title"] = "Index";
 }
 
-<section>
-    Click on the button to add an address. If you select Chicago as the city, we will perform an API call to return the current weather.
-</section>
+<article>
+    This page demonstrates the usage making AJAX calls using JQuery. <br />
+    It's a simple call to get additional details, the weather in Chicago in this case.<br />
+    $.get makes an API call to a server-side service. $.get ad $.ajax are similar except that $.get is more explicit.<br />
+    Click on the link to see the result.
+
+</article>
+
+
+
+<p></p>
+
+
 
 <a asp-controller="Address" asp-action="Create" > Add Address</a>

@@ -20,7 +20,7 @@ namespace WebUi.Models
         [DisplayName("Phone Number")]
         [DataType(DataType.PhoneNumber)]
         [Phone(ErrorMessage = "Invalid phone number.")]
-        [Remote("CheckIfLogonAlreadyExists", "CustomerSearch", ErrorMessage = "Phone Number already exists")]
+        [Remote("PhoneNumberIsUnique", "CustomerSearch", ErrorMessage = "Phone Number already exists")]
         public string PhoneNumber { get; set; }
         [DisplayName("Fax Number")]
         [DataType(DataType.PhoneNumber)]

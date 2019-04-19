@@ -1,0 +1,89 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Promises</h1>
+
+<article>
+    This page demonstrates the usage of Promises instead of callbacks. There are many ways to use promises. <br />
+    This particular example, contains multiple functions that make an AJAX call to an API and return a promise.<br />
+    Using this promise, we wait for all the successful calls to be completed before we update the page with the responses.
+</article>
+<div class="container col-6 border border-primary">
+    <div class="row">
+        <div class="col-lg-6 border border-success">
+            First, we get the Temperature : <div id="temp"></div>
+        </div>
+        <div class="col-lg-6 border border-warning">
+            Secondly, We then get the stock price: <div id="stock"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 border border-danger">
+            Thirdly, we get a random state: <div id="state"></div>
+        </div>
+        <div class="col-lg-6 border border-info">
+            Lastly, we get a random date: <div id="myDate"></div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    $(document).ready(function() {
+
+        $.when(
+            getTemperature(),
+            getStockPrice(),
+            getState(),
+            getRandomDate()
+        );
+
+
+        function getTemperature() {
+            console.log('in temp promise');
+            return $.get('@Url.Action("GetTemperature", "SomeData")',
+                function(results) {
+                    console.log('updating temp with ' + results);
+
+                    $('#temp').html(results);
+                });
+            }
+            
+
+        function getStockPrice() {
+            console.log('in stock promise');
+            return $.get('@Url.Action("GetStockPrice", "SomeData")',
+                function(results) {
+                    console.log('updating stock with ' + results);
+
+                    $('#stock').html(results);
+                });
+        }
+
+        function getState() {
+            console.log('in state promise');
+            return $.get('@Url.Action("GetStateName", "SomeData")',
+                function(results) {
+                    console.log('updating state with ' + results);
+
+                    $('#state').html(results);
+                });
+        }
+
+
+        function getRandomDate() {
+            console.log('in date promise');
+            return $.get('@Url.Action("GetARandomDate", "SomeData")',
+                function(results) {
+                    console.log('updating date with ' + results);
+
+                    $('#myDate').html(results);
+                });
+        }
+        
+    })
+</script>
+
+

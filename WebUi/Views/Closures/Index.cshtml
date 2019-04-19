@@ -1,0 +1,120 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Closures</h1>
+
+<article>
+    This page demonstrates the usage of closures. <br />
+    getData acts as a function factory. This function creates four new functions that pass different argument values. <br />
+    These four functions are the closures. They share the same code, but different data.
+</article>
+
+<div class="container col-6 border border-primary">
+    <div class="row">
+        <div  class="col-lg-6 border border-success">
+            Temperature is : <div id="temp"></div>
+        </div>
+        <div class="col-lg-6 border border-warning">
+            Stock Price is: <div id="stock"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div  class="col-lg-6 border border-danger">
+            Random State is: <div id="state"></div>
+        </div>
+        <div class="col-lg-6 border border-info">
+            Random Date is: <div id="myDate"></div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    $(document).ready(function() {
+
+
+        getData;
+
+
+        function getData(url, id) {
+            console.log("getData start");
+            $.get(url,
+                function (data) {
+                    console.log('data=' + data);
+                    $(id).html(data);
+
+                });
+        };
+
+        getData('@Url.Action("GetTemperature", "SomeData")', '#temp');
+        getData('@Url.Action("GetStockPrice", "SomeData")', '#stock');
+        getData('@Url.Action("GetStateName", "SomeData")', '#state');
+        getData('@Url.Action("GetARandomDate", "SomeData")', '#myDate');
+
+        //https://stackoverflow.com/questions/10150159/multiple-ajax-calls-at-same-time
+
+
+
+
+        @*function getTemp( ) {
+            $.ajax({
+                type: "GET",
+                url: @Url.Action("GetTemperature", "SomeData"),
+                success: function(result, status, xhr) {
+                    return result;
+                },
+                error: function(xhr, status, error) {
+                    return error;
+                }
+
+            });
+        };
+
+        function getStockPrice() {
+            $.ajax({
+                type: "GET",
+                url: @Url.Action("GetStockPrice", "SomeData"),
+                success: function(result, status, xhr) {
+                    return result;
+                },
+                error: function(xhr, status, error) {
+                    return error;
+                }
+
+            });
+        };
+
+        function getState() {
+            $.ajax({
+                type: "GET",
+                url: @Url.Action("GetStateName", "SomeData"),
+                success: function(result, status, xhr) {
+                    return result;
+                },
+                error: function(xhr, status, error) {
+                    return error;
+                }
+
+            });
+        };
+
+        function getDate() {
+            $.ajax({
+                type: "GET",
+                url: @Url.Action("GetARandomDate", "SomeData"),
+                success: function(result, status, xhr) {
+                    return result;
+                },
+                error: function(xhr, status, error) {
+                    return error;
+                }
+
+            });
+        };*@
+
+    })
+</script>
+
+

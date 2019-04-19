@@ -31,7 +31,7 @@ namespace WebUi.CustomValidatorAttributes
 
 
             if (logon != null && logon == preferredName)
-                return new ValidationResult(ErrorMessage);
+                return new ValidationResult("Logon cannot be the same as the preferred name.");
 
             return ValidationResult.Success;
         }

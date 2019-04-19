@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Application.Shared;
 using Application.UseCases.GetClientOrders;
+using Application.UseCases.GetSomeData;
 using Application.UseCases.SearchCustomerByName;
 using AutoMapper;
 using Infrastructure.Database.Context;
@@ -57,10 +58,10 @@ namespace WebUi
             })
             .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            // Add Context into the container.
-            services.AddDbContext<WideWorldImportersContext>(options =>
-                        options.UseSqlServer(Configuration.GetConnectionString("WideWorldImporters"))
-            );
+                // Add Context into the container.
+                services.AddDbContext<WideWorldImportersContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("WideWorldImporters"))
+                );
 
             services.AddAutoMapper();
 
@@ -76,6 +77,7 @@ namespace WebUi
 
             services.AddTransient<IExceptionResponse, ExceptionResponse>();
 
+            services.AddTransient<ISomeDataGetter, SomeDataGetter>();
             AddSerilogServices(services);
         }
 
