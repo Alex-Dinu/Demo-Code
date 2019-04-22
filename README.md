@@ -40,10 +40,11 @@ Mapper rules are setup in [WebUi.Shared.DataMapper class](https://github.com/Ale
 I use XUnit to run my tests. It has a few nice features:
 - Useage of constructors instead of initializers
 - Test fixtures that are loaded once and used in every test
-- Pass in data as parameters to test cases that will allow you to run the same test with multiple data elements
+- Pass in data as parameters to test cases that will allow you to run the same test with multiple data elements. You can see this in this [test](https://github.com/Alex-Dinu/Demo-Code/blob/master/Test.IntergationTests/OrderTests/GetOrderTests.cs). OrderAuthorizationTests() expects two classes that will return the parameters the test method requires.
+- Will start an Http Client based on the startup settings.
 
 #### Swashbuckle
-This package automatically generates json and a UI representation of your services. You can expand it by adding .NET XML documentation to the properties and methods and creating test data for the models. 
+This package automatically generates json and a UI representation of your services. You can expand it by adding .NET XML documentation to the properties and methods and creating test data for the models. All the settings are in one [class](https://github.com/Alex-Dinu/Demo-Code/blob/master/WebUi/Shared/SwaggerServiceExtension.cs) that is referenced in the startup class.
 
 ## MVC/API
 ### Middleware
