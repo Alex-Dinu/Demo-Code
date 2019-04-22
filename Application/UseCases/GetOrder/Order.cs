@@ -35,12 +35,12 @@ namespace Application.UseCases.GetOrder
         {
             _dataLogger.LogInformation("Application.UseCases.Order.GetOrder(clientId, orderId)", clientId, orderId);
 
-            var order = await _orderRepo.GetOrder(orderId);
+            var repoOrder = await _orderRepo.GetOrder(orderId);
+            var order = _mapper.Map<OrderApplicationResponseModel>(repoOrder);
 
+            _clientOrderAuthorization.AuthorizeClientToViewOrder(clientId, order);
 
-            _clientOrderAuthorization.AuthorizeClientToViewOrder(clientId, _mapper.Map<OrderApplicationResponseModel>(order));
-
-            return _mapper.Map<OrderApplicationResponseModel>(order);
+            return order;
         }
     }
 

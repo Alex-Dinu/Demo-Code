@@ -41,6 +41,7 @@ namespace WebUi.Controllers
 
         }
         // GET: CustomerSearch
+        [HttpGet]
         public async Task<ActionResult<IEnumerable<CustomerSearchMvcResponseModel>>> Index()
         {
             _dataLogger.LogInformation("In WebUi.Controllers.CustomerSearchControllerIndex()");
@@ -65,6 +66,7 @@ namespace WebUi.Controllers
         //}
 
         // GET: CustomerSearch/Create
+        [HttpGet]
         public ActionResult Create()
         {
             return View();
@@ -88,6 +90,8 @@ namespace WebUi.Controllers
         }
 
         // GET: CustomerSearch/Edit/5
+        [HttpGet]
+
         public async Task<ActionResult<CustomerSearchMvcResponseModel>> Edit(int customerId)
         {
             var customers = await GetCustomers(string.Empty);
@@ -137,6 +141,7 @@ namespace WebUi.Controllers
         //    }
         //}
 
+        [ApiExplorerSettings(IgnoreApi = true)]
         [AcceptVerbs("Get", "Post")]
         public async Task<IActionResult> PhoneNumberIsUnique(string phoneNumber)
         {

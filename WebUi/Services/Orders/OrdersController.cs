@@ -1,4 +1,6 @@
-﻿using Application.UseCases.GetClientOrders;
+﻿using Application.Shared.Exceptions;
+using Application.UseCases.GetClientOrders;
+using Application.UseCases.GetOrder;
 using AutoMapper;
 using Infrastructure.Log;
 using Microsoft.AspNetCore.Mvc;
@@ -7,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebUi.Middleware.ExceptionResponse;
+using WebUi.Models;
 using WebUi.Shared;
 
 namespace WebUi.Services.Orders
@@ -18,14 +21,17 @@ namespace WebUi.Services.Orders
     {
         IMapper _mapper;
         IClientOrder _clientOrder;
+        IOrder _order;
 
         public OrdersController(IMapper mapper
             , IClientOrder clientOrder
-            , IDataLogger dataLogger)
+            , IDataLogger dataLogger
+            , IOrder order)
         {
             _mapper = mapper;
             _clientOrder = clientOrder;
             base.DataLogger = dataLogger;
+            _order = order;
         }
 
         [HttpGet("{clientId}")]
@@ -58,5 +64,36 @@ namespace WebUi.Services.Orders
             }
         }
 
+        [HttpGet("{clientId}/{orderId}")]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(typeof(OrderMvcResponseModel), 200)]
+
+        public async Task<ActionResult<OrderMvcResponseModel>> Details(int clientId, int orderId)
+        {
+            try
+            {
+                var applicationOrder = await _order.GetOrder(clientId, orderId);
+                var order = _mapper.Map<OrderMvcResponseModel>(applicationOrder);
+
+                if (order == null)
+                    return NotFound();
+
+                return Ok(order);
+            }
+            catch (ClientOrderAuthorizationException authEx)
+            {
+                return Unauthorized(authEx.Message);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+
+            }
+
+        }
     }
+
+
 }

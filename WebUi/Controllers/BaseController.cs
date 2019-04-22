@@ -13,6 +13,7 @@ namespace WebUi.Controllers
         public IDataLogger DataLogger;
 
         [NonAction]
+        [ApiExplorerSettings(IgnoreApi = true)]
         public ErrorResponseModel GetResponseObject(string name, string message)
         {
             var response = new ErrorResponseModel

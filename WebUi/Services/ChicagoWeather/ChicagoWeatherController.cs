@@ -15,6 +15,7 @@ namespace WebUi.Services.ChicagoWeather
     [ApiController]
     public class ChicagoWeatherController : BaseServiceController
     {
+        [HttpGet]
         public async Task<IActionResult> GetChicagoWeather()
         {
             return Ok("Cold, what else can it be?");

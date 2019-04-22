@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Application.Shared;
 using Application.UseCases.GetClientOrders;
+using Application.UseCases.GetOrder;
 using Application.UseCases.GetSomeData;
 using Application.UseCases.SearchCustomerByName;
 using AutoMapper;
@@ -21,6 +22,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Serilog;
 using WebUi.Middleware;
 using WebUi.Middleware.ExceptionResponse;
+using WebUi.Shared;
 
 namespace WebUi
 {
@@ -68,6 +70,7 @@ namespace WebUi
             // Add services into the container.
             services.AddScoped<IDataLogger, DataLogger>();
             services.AddTransient<IClientOrders, ClientOrders>();
+            services.AddTransient<IOrder, Order>();
             services.AddTransient<IClientOrder, ClientOrder>();
             services.AddTransient<IOrderRepo, OrderRepo>();
             services.AddTransient<IClientOrderAuthorization, ClientOrderAuthorization>();
@@ -79,6 +82,8 @@ namespace WebUi
 
             services.AddTransient<ISomeDataGetter, SomeDataGetter>();
             AddSerilogServices(services);
+
+            services.AddSwaggerDocumentation();
         }
 
         private void AddSerilogServices(IServiceCollection services)
@@ -107,6 +112,7 @@ namespace WebUi
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseSwaggerDocumentation();
             }
             else
             {

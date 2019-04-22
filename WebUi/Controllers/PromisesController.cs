@@ -9,6 +9,7 @@ namespace WebUi.Controllers
 {
     public class PromisesController : BaseServiceController
     {
+        [HttpGet]
         public IActionResult Index()
         {
             return View();

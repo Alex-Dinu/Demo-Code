@@ -1,4 +1,5 @@
 ﻿using Application.UseCases.GetClientOrders;
+using Application.UseCases.GetOrder;
 using Application.UseCases.SearchCustomerByName;
 using AutoMapper;
 using Infrastructure.Database.Repo.Customer;
@@ -25,6 +26,9 @@ namespace WebUi.Shared
             CreateMap<CustomerSearchRepoResponseModel, CustomerSearchApplicationResponseModel>();
 
             CreateMap<CustomerSearchApplicationResponseModel, CustomerSearchMvcResponseModel>();
+
+            CreateMap<ClientOrderApplicationResponseModel, OrderMvcResponseListModel > ();
+            CreateMap<OrderApplicationResponseModel, OrderMvcResponseModel > ();
 
         }
 

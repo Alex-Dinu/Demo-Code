@@ -9,6 +9,7 @@ namespace WebUi.Controllers
 {
     public class ClosuresController : BaseServiceController
     {
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             return View();

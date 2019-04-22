@@ -32,7 +32,7 @@
                     <li class="nav-item active">
                         <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home <span class="sr-only">(current)</span></a>
                     </li>
-                    
+
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false">
@@ -40,11 +40,11 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li>
-                                <a class="dropdown-item" asp-area="" asp-controller="CustomerSearch" asp-action="Index">Stored Procedure</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="WebApi" asp-action="Index">Stored Procedure</a>
                             </li>
                         </ul>
                     </li>
-                    
+
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false">
@@ -56,7 +56,7 @@
                             </li>
                         </ul>
                     </li>
-                    
+
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false">
@@ -65,14 +65,32 @@
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li>
                                 <a class="dropdown-item" asp-area="" asp-controller="Address" asp-action="Index">AJAX Call</a>
-                            </li>                           <li>
+                            </li>
+                            <li>
                                 <a class="dropdown-item" asp-area="" asp-controller="Closures" asp-action="Index">Closures</a>
                             </li>
                             <li>
                                 <a class="dropdown-item" asp-area="" asp-controller="Promises" asp-action="Index">Promises</a>
                             </li>
                         </ul>
-                    </li>                   
+                    </li>
+
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">
+                            Misc
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li>
+                                <a class="dropdown-item" href="http://localhost:50711/swagger/index.html" target="_blank">Swagger UI</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="http://localhost:50711/swagger/v1.0/swagger.json" target="_blank">Swagger JSON</a>
+                            </li>
+                        </ul>
+                    </li>
+                    
 
                 </ul>
             </div>
@@ -125,7 +143,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2019 - Wide World Importers - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2019 - Demo project - 
         </div>
     </footer>
 

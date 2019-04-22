@@ -21,7 +21,7 @@ namespace Test.IntergationTests.CustomerSearchTests
         {
             var customers = await _customerSearch.GetCustomersByName("a");
 
-            Assert.True(customers.)
+            Assert.True(customers.Count > 1);
         }
     }
 }
