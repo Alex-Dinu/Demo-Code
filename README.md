@@ -37,7 +37,10 @@ AutoMapper is a library I use to map the different data objects that are passed 
 Mapper rules are setup in [WebUi.Shared.DataMapper class](https://github.com/Alex-Dinu/Demo-Code/blob/master/WebUi/Shared/DataMapper.cs) and is added as a service in Startup.cs.
 
 #### XUnit
-I use XUnit to run my tests.
+I use XUnit to run my tests. It has a few nice features:
+- Useage of constructors instead of initializers
+- Test fixtures that are loaded once and used in every test
+- Pass in data as parameters to test cases that will allow you to run the same test with multiple data elements
 
 ## MVC/API
 ### Middleware
