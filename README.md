@@ -42,6 +42,9 @@ I use XUnit to run my tests. It has a few nice features:
 - Test fixtures that are loaded once and used in every test
 - Pass in data as parameters to test cases that will allow you to run the same test with multiple data elements
 
+#### Swashbuckle
+This package automatically generates json and a UI representation of your services. You can expand it by adding .NET XML documentation to the properties and methods and creating test data for the models. 
+
 ## MVC/API
 ### Middleware
 We use [middleware](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/middleware/?view=aspnetcore-2.2) to manage the request pipeline. Any classes that the middleware require need to be added to the container in Startup.cs and we need to also add the middleware to the application also in Startup.Configure() method.
