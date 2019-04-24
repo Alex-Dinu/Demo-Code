@@ -1,0 +1,174 @@
+﻿
+<style>
+
+
+
+    h3 {
+        font-size: 23px;
+        border-bottom: solid 3px #CCC;
+        padding-bottom: 10px;
+    }
+
+        h3 a {
+            color: #00e8ff;
+            text-decoration: none;
+        }
+
+            h3 a:hover, h2 a:hover {
+                text-decoration: underline;
+            }
+
+
+
+    .container #content {
+        padding: 10px;
+    }
+
+    #reset {
+        padding: 5px 10px;
+        background: #4CAF50;
+        border: none;
+        color: #FFF;
+        cursor: pointer;
+    }
+
+        #reset:hover {
+            color: #4CAF50;
+            background: #FFF;
+        }
+
+    #viewContent #searchInput, #viewContent #autoCompleteSelect {
+        width: 430px;
+    }
+
+    #viewContent #searchInput {
+        padding: 5px 0;
+    }
+
+    #viewContent #autoCompleteSelect option:hover {
+        background-color: #d8fff7;
+        cursor: pointer;
+    }
+
+    ::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+    }
+</style>
+
+
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="/mvc/Content/JS/jquery-2.2.4.js"></script>
+
+<p></p>
+<p>
+    This part demonstrates performing the generation of the auto-complete values on the server.
+</p>
+
+        <div id="viewContent">
+            <input type="text" id="searchInput" placeholder="Enter a state" />
+            <div id="autoCompleteDiv"></div>
+        </div>
+
+<p></p>
+<p>This part pre-populates the full list using an ajax call and using JQuery's autocomplete features.</p>
+
+<div class="ui-widget">
+    <input id="myStates" placeholder="Enter a state" />
+</div>
+
+<script>
+
+    var states;
+    $(document).ready(function () {
+
+
+
+
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("GetJQueryStates", "AutoComplete")',
+                dataType: "html",
+                success: function (result) {
+                    states = result.split(",");
+
+                    $('#myStates').autocomplete({
+                        source: states
+                    });
+                },
+                error: function (xhr, status, error) {
+                    alert(xhr + " " + status + " " + error);
+                }
+            });
+
+
+
+
+
+
+
+        $("#searchInput").keyup(function (event) {
+            if (event.which == 40) /*Arrow Down*/
+            {
+                $("#autoCompleteSelect").val($("#autoCompleteSelect option:first").val());
+                $("#autoCompleteSelect").focus();
+                $(this).val($("#autoCompleteSelect :selected").text());
+            }
+            else {
+                if ($(this).val().length > 2) {
+                    FillAutoComplete($(this).val());
+                }
+                else
+                    $("#autoCompleteDiv").hide();
+            }
+        });
+
+    });
+
+    //key up event
+
+    function FillAutoComplete(value) {
+
+
+        var dataToSend = { searchValue: value }; //JSON.stringify(this.dataToSend)
+
+        console.log('1=' + JSON.stringify(dataToSend));
+
+        $.ajax({
+            type: "GET",
+            url: '@Url.Action("MvcAutoComplete", "AutoComplete")' + '?searchValue=' + value,
+            dataType: "html",
+            success: function (result, status, xhr) {
+                $("#autoCompleteDiv").html(result);
+                $("#autoCompleteDiv").show();
+            },
+            error: function (xhr, status, error) {
+                alert(xhr + " " + status + " " + error);
+            }
+        });
+        return false;
+    }
+
+    $("#viewContent").on("change", "#autoCompleteSelect", function () {
+        $("#searchInput").val($("#autoCompleteSelect :selected").text());
+    });
+
+    $("#viewContent").on("click", "#autoCompleteSelect", function () {
+        $("#autoCompleteDiv").hide();
+        location.href = $(this).val();
+    });
+
+
+</script>
+
