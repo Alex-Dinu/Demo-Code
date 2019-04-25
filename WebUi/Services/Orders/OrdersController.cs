@@ -34,6 +34,11 @@ namespace WebUi.Services.Orders
             _order = order;
         }
 
+        /// <summary>
+        /// Retrieve an order.
+        /// </summary>
+        /// <param name="clientId">The orderId to retrieve.</param>
+        /// <returns></returns>
         [HttpGet("{clientId}")]
         [ProducesResponseType(404)]
         [ProducesResponseType(typeof(ErrorResponseModel), 409)]
