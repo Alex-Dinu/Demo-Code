@@ -4,16 +4,18 @@ The purpose of this repository is to showcase various tools, development princip
 
 ## Technologies and tools
 ### Architecture
-Although the solution is not strictly [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html), it does implement the basic principles. I did take some shortcuts in order to make it easier to follow and try it out.
+Although the solution is not strictly [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html), it does implement the basic principles. I did take some shortcuts in order to make it easier to follow the code and try it out. One of the rules of CA is a strict direction of data flow and to use interfaces when communicating the opposite direction.
+
+One way to implement these rules, is to use 3rd prty packages that reduce the amount of code you have to write. An example of such a package is documented below (Automapper).
 
 ## .NET Core
 ### Tools and packages
 #### Logger
-I use [Serilog](https://serilog.net/) in order to help me log information and errors in JSON format in a daily rolling file with a max size.
+Microsoft introduced ILogger to help us log information. There are numerous other 3rd party packages that extend ILOgger and add additional functionality. I use [Serilog](https://serilog.net/) in order to help me log information and errors in JSON format in a daily rolling file with a max size.
 
 The Infrastructure.Log project does it all. It is referenced by each project that requires to log something. I set up some properties in Startup.cs in a private AddSerilogServices() method. We are also loading the class as scoped. The reason being is that it also generates a unique ID for each http request, so when we log the events and errors, we can easily search by the ID and order by the date so we can see a complete picture of a specific request. You can vew the code [here](https://github.com/Alex-Dinu/Demo-Code/blob/master/Infrastructure.Log/DataLogger.cs).
 
-The following NugetPackages are used:
+Serilog has a rich number of supporting packages. The following NugetPackages are used:
 
  - Serilog.Exceptions which makes it easier to log exceptions and their properties.
  - Serilog.Settings.Configuration is used to read some configuration settings
@@ -33,18 +35,22 @@ Being a .NETCore solution, EFCore is being used. While most of the demos do not 
 3. Update the EFCore connection string in the appsettings file.
 
 #### AutoMapper
-AutoMapper is a library I use to map the different data objects that are passed between the different layers in Clean Architecture solution.
+[AutoMapper](http://automapper.org/) is a library I use to map the different data objects that are passed between the different layers in Clean Architecture solution.
 Mapper rules are setup in [WebUi.Shared.DataMapper class](https://github.com/Alex-Dinu/Demo-Code/blob/master/WebUi/Shared/DataMapper.cs) and is added as a service in Startup.cs.
 
 #### XUnit
 I use XUnit to run my tests. It has a few nice features:
 - Useage of constructors instead of initializers
-- Test fixtures that are loaded once and used in every test
+- [Test fixtures](https://github.com/Alex-Dinu/Demo-Code/blob/master/Test.IntergationTests/TextFixtures/TestClientFixture.cs) that are loaded once and used in every test
 - Pass in data as parameters to test cases that will allow you to run the same test with multiple data elements. You can see this in this [test](https://github.com/Alex-Dinu/Demo-Code/blob/master/Test.IntergationTests/OrderTests/GetOrderTests.cs). OrderAuthorizationTests() expects two classes that will return the parameters the test method requires.
 - Will start an Http Client based on the startup settings.
 
 #### Swashbuckle
-This package automatically generates json and a UI representation of your services. You can expand it by adding .NET XML documentation to the properties and methods and creating test data for the models. All the settings are in one [class](https://github.com/Alex-Dinu/Demo-Code/blob/master/WebUi/Shared/SwaggerServiceExtension.cs) that is referenced in the startup class.
+This package automatically generates json and a UI representation of your services. You can expand it by adding .NET XML documentation to the properties and methods and creating test data for the models. All the settings are in one [class](https://github.com/Alex-Dinu/Demo-Code/blob/master/WebUi/Shared/SwaggerServiceExtension.cs) that is referenced in the startup class. You can also document {sample data](https://github.com/Alex-Dinu/Demo-Code/blob/master/WebUi/Services/Orders/ClientOrderServiceResponseModel.cs)
+
+To get the JSON code that can be used to communicate with consumers, follow this [link](http://localhost:62681/swagger/v1.0/swagger.json)
+
+To view the UI, follow this [link](http://localhost:62681/swagger/index.html)
 
 ## MVC/API
 ### Middleware
@@ -86,4 +92,13 @@ The first parameter is the action an the second is the controller.
 
 ### AJAX calls
 This demonstrates a simple AJAX call to get some results from an API call. You can look at the code [here](https://github.com/Alex-Dinu/Demo-Code/blob/master/WebUi/Views/Address/Create.cshtml) and see it in action by running the site and selecting AJAX from the JQUery menu.
+
+## TODO
+The following section lists additional code I want to add to the solution.
+- [Role authorization](https://docs.microsoft.com/en-us/aspnet/core/mvc/views/tag-helpers/authoring?view=aspnetcore-2.2)
+- [Fluent validations](https://fluentvalidation.net/)
+- [SignalR](https://docs.microsoft.com/en-us/aspnet/core/signalr/introduction?view=aspnetcore-2.2)
+- [Blazer](https://github.com/aspnet/AspNetCore/tree/master/src/Components)
+- [Filters](https://docs.microsoft.com/en-us/aspnet/core/mvc/controllers/filters?view=aspnetcore-2.1)
+- [Health Monitoring](https://docs.microsoft.com/en-us/dotnet/standard/microservices-architecture/implement-resilient-applications/monitor-app-health)
 
