@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+
+</head>
+<body>
+<style>
+    div {
+        padding-top: 2px;
+        padding-bottom: 1px;
+        padding-left: 5px;
+    }
+    .Highlight {
+        background-color: Yellow;
+    }
+</style>
+<p></p>
+<div>
+    <article>
+        A simple page that showcases the usage of events. When a specific element with a specific class is changed<br />
+        we highlight the element to identify that it was modified.<br />
+        We also check that only numbers are entered in the phone element.
+    </article>
+</div>
+    <p></p>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-1">First Name </div>
+        <div class="col-lg-2"><input id="FirstNameTextBox" type="text" class="ChangeCheck"/></div>
+    </div>
+    <div class="row">
+        <div class="col-lg-1">Last Name </div>
+        <div class="col-lg-2"><input id="LastNameTextBox" type="text" class="ChangeCheck"/></div>
+    </div>
+    <div class="row">
+        <div class="col-lg-1">Comment</div>
+        <div class="col-lg-2"><textarea class="ChangeCheck" rows="5" cols="60" id="CommentsTextBox"></textarea></div>
+    </div>
+    <div class="row">
+        <div class="col-lg-1">Phone</div>
+        <div class="col-lg-2">
+            <div id="PhonesDiv" style="margin-top: 10px;">
+                <div class="PhoneTypeDiv">
+                    <select class="PhoneType">
+                        <option value="">Select One:</option>
+                        <option value="Mobile">Mobile</option>
+                        <option value="Office">Office</option>
+                    </select>
+                </div>
+                <div class="PhoneNumberDiv">
+                    <input type="text" class="PhoneNumber ChangeCheck" maxlength="12"/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-1">State</div>
+        <div class="col-lg-2">
+            <select id="StatesSelect" class="ChangeCheck">
+                <option value="AZ">AZ</option>
+                <option value="CA" selected="true">CA</option>
+            </select>
+        </div>
+    </div>
+</div>
+    
+<script type="text/javascript">
+    $(document).ready(function () {
+        WireEvents();
+    });
+
+    function WireEvents() {
+
+        //Handle select
+        $('.ChangeCheck').change(function() {
+
+            $(this).addClass('Highlight');
+        });
+
+        var phonesDiv = $('#PhonesDiv');
+
+        phonesDiv.on('keypress', 'input', function (e) {
+            if ((e.keyCode < 48 || e.keyCode > 57) && e.keyCode != 45) {
+                e.stopPropagation();
+                return false;
+            }
+        });
+
+    }
+</script>
+        </body>
+            </html>

@@ -9,14 +9,14 @@
         padding-bottom: 10px;
     }
 
-        h3 a {
-            color: #00e8ff;
-            text-decoration: none;
-        }
+    h3 a {
+        color: #00e8ff;
+        text-decoration: none;
+    }
 
-            h3 a:hover, h2 a:hover {
-                text-decoration: underline;
-            }
+    h3 a:hover, h2 a:hover {
+        text-decoration: underline;
+    }
 
 
 
@@ -50,26 +50,13 @@
         cursor: pointer;
     }
 
-    ::-webkit-scrollbar {
-        width: 10px;
-    }
-
-    ::-webkit-scrollbar-track {
-        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-        border-radius: 10px;
-    }
-
-    ::-webkit-scrollbar-thumb {
-        border-radius: 10px;
-        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
-    }
 </style>
 
 
 
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src="/mvc/Content/JS/jquery-2.2.4.js"></script>
+@*<script src="/mvc/Content/JS/jquery-2.2.4.js"></script>*@
 
 <p></p>
 <p>
@@ -88,36 +75,32 @@
     <input id="myStates" placeholder="Enter a state" />
 </div>
 
+
 <script>
 
     var states;
     $(document).ready(function () {
 
 
+        // This pre-populates a variable that will contain all possible auto-complete value.
+        $.ajax({
+            type: "GET",
+            url: '@Url.Action("GetJQueryStates", "AutoComplete")',
+            dataType: "html",
+            success: function (result) {
+                states = result.split(",");
+
+                $('#myStates').autocomplete({
+                    source: states
+                });
+            },
+            error: function (xhr, status, error) {
+                alert(xhr + " " + status + " " + error);
+            }
+        });
 
 
-            $.ajax({
-                type: "GET",
-                url: '@Url.Action("GetJQueryStates", "AutoComplete")',
-                dataType: "html",
-                success: function (result) {
-                    states = result.split(",");
-
-                    $('#myStates').autocomplete({
-                        source: states
-                    });
-                },
-                error: function (xhr, status, error) {
-                    alert(xhr + " " + status + " " + error);
-                }
-            });
-
-
-
-
-
-
-
+        // The code below handles the MVC autocomplete.
         $("#searchInput").keyup(function (event) {
             if (event.which == 40) /*Arrow Down*/
             {
@@ -134,41 +117,34 @@
             }
         });
 
-    });
-
-    //key up event
-
-    function FillAutoComplete(value) {
 
 
-        var dataToSend = { searchValue: value }; //JSON.stringify(this.dataToSend)
+        //key up event
 
-        console.log('1=' + JSON.stringify(dataToSend));
+        function FillAutoComplete(value) {
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("MvcAutoComplete", "AutoComplete")' + '?searchValue=' + value,
+                dataType: "html",
+                success: function (result, status, xhr) {
+                    $("#autoCompleteDiv").html(result.replace(/\$\$/g, '"'));
+                    $("#autoCompleteDiv").show();
+                },
+                error: function (xhr, status, error) {
+                    alert(xhr + " " + status + " " + error);
+                }
+            });
+            return false;
+        }
 
-        $.ajax({
-            type: "GET",
-            url: '@Url.Action("MvcAutoComplete", "AutoComplete")' + '?searchValue=' + value,
-            dataType: "html",
-            success: function (result, status, xhr) {
-                $("#autoCompleteDiv").html(result);
-                $("#autoCompleteDiv").show();
-            },
-            error: function (xhr, status, error) {
-                alert(xhr + " " + status + " " + error);
-            }
+        $("#viewContent").on("change", "#autoCompleteSelect", function () {
+            $("#searchInput").val($("#autoCompleteSelect :selected").text());
         });
-        return false;
-    }
 
-    $("#viewContent").on("change", "#autoCompleteSelect", function () {
-        $("#searchInput").val($("#autoCompleteSelect :selected").text());
+        $("#viewContent").on("click", "#autoCompleteSelect", function () {
+            $("#autoCompleteDiv").hide();
+        });
+
     });
-
-    $("#viewContent").on("click", "#autoCompleteSelect", function () {
-        $("#autoCompleteDiv").hide();
-        location.href = $(this).val();
-    });
-
-
 </script>
 

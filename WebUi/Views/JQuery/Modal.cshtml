@@ -1,0 +1,128 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+
+</head>
+<body>
+    <style>
+        div {
+            padding-top: 2px;
+            padding-bottom: 1px;
+            padding-left: 5px;
+        }
+        .help {
+            color:#fff;
+            background-color:#feb22a;
+            width:12px;
+            height:12px;
+            display:inline-block;
+            border-radius:100%;
+            font-size:10px;
+            text-align:center;
+            text-decoration:none;
+            -webkit-box-shadow: inset -1px -1px 1px 0px rgba(0,0,0,0.25);
+            -moz-box-shadow: inset -1px -1px 1px 0px rgba(0,0,0,0.25);
+            box-shadow: inset -1px -1px 1px 0px rgba(0,0,0,0.25);
+        }
+    </style>
+    <p></p>
+    <div>
+        <article>
+            Bootstrap Modal example. Hover over the ? next to the phone number.
+        </article>
+    </div>
+    <p></p>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-1">First Name </div>
+            <div class="col-lg-2"><input id="FirstNameTextBox" type="text" class="ChangeCheck" /></div>
+        </div>
+        <div class="row">
+            <div class="col-lg-1">Last Name </div>
+            <div class="col-lg-2"><input id="LastNameTextBox" type="text" class="ChangeCheck" /></div>
+        </div>
+        <div class="row">
+            <div class="col-lg-1">Comment</div>
+            <div class="col-lg-2"><textarea class="ChangeCheck" rows="5" cols="60" id="CommentsTextBox"></textarea></div>
+        </div>
+        <div class="row">
+            <div class="col-lg-1">Phone</div>
+            <div class="col-lg-2">
+                <div id="PhonesDiv" style="margin-top: 10px;">
+                    <div class="PhoneTypeDiv">
+                        <select class="PhoneType">
+                            <option value="">Select One:</option>
+                            <option value="Mobile">Mobile</option>
+                            <option value="Office">Office</option>
+                        </select>
+                    </div>
+                    <div class="PhoneNumberDiv">
+                        <input type="text" class="PhoneNumber ChangeCheck" maxlength="12" /> <a id="helpIcon" class="help" href="#">?</a>
+                    </div>
+                    <div id="PhoneHelp">phone help text.</div>
+                    <!-- Modal -->
+                    <div class="modal fade" id="myModal" role="dialog">
+                        <div class="modal-dialog">
+    
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Phone Number entry instructions</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Enter numbers only.</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+      
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-1">State</div>
+            <div class="col-lg-2">
+                <select id="StatesSelect" class="ChangeCheck">
+                    <option value="AZ">AZ</option>
+                    <option value="CA" selected="true">CA</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+    $(document).ready(function () {
+        WireEvents();
+    });
+
+    function WireEvents() {
+
+
+        var phonesDiv = $('#PhonesDiv');
+
+        phonesDiv.on('keypress', 'input', function (e) {
+            if ((e.keyCode < 48 || e.keyCode > 57) && e.keyCode != 45) {
+                e.stopPropagation();
+                return false;
+            }
+        });
+
+        $('#helpIcon').hover(
+            function () {
+                console.log("mouseenter");
+                $('#myModal').modal();
+            },
+            function() {
+                //$('#myModal').modal('hide');
+            }
+            );
+
+    }
+    </script>
+</body>
+</html>

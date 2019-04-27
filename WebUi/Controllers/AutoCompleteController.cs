@@ -67,20 +67,34 @@ namespace WebUi.Controllers
 
         [HttpGet]
        // [ValidateAntiForgeryToken]
-        public ActionResult<string> MvcAutoComplete(string searchValue)
+        public string MvcAutoComplete(string searchValue)
         {
 
             StringBuilder sb = new StringBuilder();
-            sb.Append("<select id=\"autoCompleteSelect\" size=\"5\">");
+            sb.Append("<select id='autoCompleteSelect' size='5'>");
 
             foreach (string state in States)
             {
                 if (state.IndexOf(searchValue, 0, StringComparison.CurrentCultureIgnoreCase) != -1)
-                    sb.Append("<option value=\"" + state + "\">" + state + "</option>");
+                    sb.Append("<option>" + state + "</option>");
             }
 
             sb.Append("</select>");
             return sb.ToString();
+
+
+
+            //StringBuilder sb = new StringBuilder();
+            //sb.Append("<select id=\"autoCompleteSelect\" size=\"5\">");
+
+            //foreach (string state in States)
+            //{
+            //    if (state.IndexOf(searchValue, 0, StringComparison.CurrentCultureIgnoreCase) != -1)
+            //        sb.Append("<option value=\"" + state + "\">" + state + "</option>");
+            //}
+
+            //sb.Append("</select>");
+            //return sb.ToString();
 
             //Dictionary<string, string> dataDictionary = new Dictionary<string, string>();
             //dataDictionary.Add("jQuery Validation of Email, Number, Checkbox and More", "http://www.yogihosting.com/using-jquery-to-validate-a-form/");

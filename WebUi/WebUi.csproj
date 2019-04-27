@@ -5,6 +5,18 @@
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Content Remove="Views\JQuery\AppendTable.cshtml" />
+    <Content Remove="Views\JQuery\Modal.cshtml" />
+    <Content Remove="Views\JQuery\WhatHasChanged.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Views\JQuery\AppendTable.cshtml" />
+    <None Include="Views\JQuery\Modal.cshtml" />
+    <None Include="Views\JQuery\WhatHasChanged.cshtml" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />

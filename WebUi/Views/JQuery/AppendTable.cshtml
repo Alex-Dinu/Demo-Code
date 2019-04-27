@@ -1,0 +1,89 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+
+</head>
+<body>
+<p></p>
+<div>
+    <article>
+        An example of using AJAX to get JSON data and generate table rows using the append method.
+    </article>
+</div>
+<p></p>
+
+
+<table id='customerData' border="1"></table>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+
+
+        $.ajax({
+            type: "GET",
+            url: '@Url.Action("GetCustomers", "JQuery")',
+            dataType: "json",
+            success: function(result) {
+                var customerTable = $('#customerData');
+
+                customerTable.append(
+                    '<tr><td> Id </td> <td> First Name </td> <td> Last Name </td> <td> Email </td> <td> Phone </td></tr>');
+
+                $($.parseJSON(result).customers).each(function(index, element) {
+
+
+                    customerTable.append('<tr><td> ' +
+                        element[0] +
+                        ' </td> <td> ' +
+                        element[1] +
+                        ' </td> <td> ' +
+                        element[2] +
+                        ' </td> <td> ' +
+                        element[3] +
+                        ' </td> <td> ' +
+                        element[4] +
+                        ' </td></tr>');
+                });
+
+            },
+            error: function(xhr, status, error) {
+                alert(xhr + " " + status + " " + error);
+            }
+        });
+
+
+
+        @*var json = (function () {
+            var json = null;
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("GetCustomers", "JQuery")',
+                dataType: "json",
+                success: function (result) {
+                    json = result;
+                    $(result.customers).each(function(index, element) {
+                        $('#customerData').append('<tr><td> ' + element[0] + ' </td> <td> ' + element[1] + ' </td></tr>');
+                    });
+
+                },
+                error: function (xhr, status, error) {
+                    alert(xhr + " " + status + " " + error);
+                }
+            });
+            return json;
+        })();*@
+
+
+        //console.log(json);
+
+        //$(json.customers).each(function(index, element) {
+        //    $('#customerData').append('<tr><td> ' + element[0] + ' </td> <td> ' + element[1] + ' </td></tr>');
+        //});
+    });
+</script>
+
+</body>
+
+</html >
