@@ -46,11 +46,11 @@ I use XUnit to run my tests. It has a few nice features:
 - Will start an Http Client based on the startup settings.
 
 #### Swashbuckle
-This package automatically generates json and a UI representation of your services. You can expand it by adding .NET XML documentation to the properties and methods and creating test data for the models. All the settings are in one [class](https://github.com/Alex-Dinu/Demo-Code/blob/master/WebUi/Shared/SwaggerServiceExtension.cs) that is referenced in the startup class. You can also document {sample data](https://github.com/Alex-Dinu/Demo-Code/blob/master/WebUi/Services/Orders/ClientOrderServiceResponseModel.cs)
+This package automatically generates json and a UI representation of your services. You can expand it by adding .NET XML documentation to the properties and methods and creating test data for the models. All the settings are in one [class](https://github.com/Alex-Dinu/Demo-Code/blob/master/WebUi/Shared/SwaggerServiceExtension.cs) that is referenced in the startup class. You can also document [sample data](https://github.com/Alex-Dinu/Demo-Code/blob/master/WebUi/Services/Orders/ClientOrderServiceResponseModel.cs)
 
-To get the JSON code that can be used to communicate with consumers, follow this [link](http://localhost:62681/swagger/v1.0/swagger.json)
+To get the JSON code that can be used to communicate with consumers, add the following to the end of the home URL: /swagger/v1.0/swagger.json e.g. http://localhost:62681/swagger/v1.0/swagger.json
 
-To view the UI, follow this [link](http://localhost:62681/swagger/index.html)
+To view the UI, add the following to the end of the home URL: /swagger/index.html e.g. http://localhost:62681/swagger/index.html
 
 ## MVC/API
 ### Middleware
