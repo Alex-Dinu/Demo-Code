@@ -1,0 +1,95 @@
+﻿
+@{
+    ViewData["Title"] = "ShopList";
+}
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>jQuery UI Droppable - Default functionality</title>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var data = { items: [] };
+
+
+
+            $('#pay').on('click', function () {
+                makePayment();
+            });
+
+            $("li").draggable();
+
+
+            $("#droppable").droppable({
+                drop: function (event, ui) {
+                    var id = ui.draggable.attr("id");
+                    var classString = ui.draggable.attr("class");
+                    var cls = classString.substr(0, classString.indexOf(' '));
+
+                    console.log('item=' + id + ', price=' + ui.draggable.data("price"));
+
+                    data.items.push({ item: id, price: ui.draggable.data("price") });
+                }
+            });
+
+            function makePayment() {
+                $('.receipt').attr('hidden', false);
+                var html = '';
+                $.each(data.items, function (key, value) {
+                    html += '<tr>';
+                    html += '<td width="200px">' + value.item + '</td>';
+                    html += '<td width="100px">' + '$' + value.price.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + '</td>';
+
+                    html += '</tr>';
+                });
+                $('table tbody').html(html);
+            };
+
+
+        });
+    </script>
+</head>
+<body>
+<article>
+    This page demonstrates the usage of JQuery UI classes, specifically the drag and drop features.<br />
+    Select an item and drop it into the shopping cart. This action will update JSON data variable with the item and price.<br />
+    When done, click the [Complete Shopping] button to get the receipt.
+</article>
+
+    <ul id="shoppingItems">
+        <li id="bread" data-price="1.49"><div style="background-color:beige;width:100px; height: 50px;" id="drag">Bread</div></li>
+        <li id="milk" data-price="2.99"><div style="background-color:white;width:100px; height: 50px;" id="drag">Milk</div></li>
+        <li id="eggs" data-price="0.79"><div style="background-color:cornsilk;width:100px; height: 50px;" id="drag">Eggs</div></li>
+        <li id="ice cream" data-price="5.99"><div style="background-color:indianred;width:100px; height: 50px;" id="drag">Ice Cream</div></li>
+        <li id="orange juice" data-price="3.79"><div style="background-color:darkorange;width:100px; height: 50px;" id="drag">Orange Juice</div></li>
+    </ul>
+    <p></p>
+    <div id="droppable">
+        <p style="background-color: azure;border:double;width:700px; height: 300px;">Shopping cart</p>
+    </div>
+    <p></p>
+    <button id="pay">Complete shopping</button>
+
+
+
+    <p class="receipt" hidden="hidden">
+        Receipt <br /><br />
+
+        <table>
+            <thead>
+                <tr>
+                    <!--<th>Item</th>
+                    <th>Price</th>-->
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </p>
+
+
+</body>
+</html>
+

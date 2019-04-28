@@ -7,10 +7,12 @@
 
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link href="~/lib/jquery-ui/jquery-ui.css" rel="stylesheet" />
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
         <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+        <script src="~/lib/jquery-ui/jquery-ui.js"></script>
     </environment>
     <environment exclude="Development">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -56,6 +58,19 @@
                             </li>
                         </ul>
                     </li>
+                    
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">
+                            JQuery UI
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li>
+                                <a class="dropdown-item" asp-area="" asp-controller="JQueryUI" asp-action="ShopList">Shopping List</a>
+                            </li>
+                        </ul>   
+
+                    </li>
 
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
@@ -84,9 +99,7 @@
                             <li>
                                 <a class="dropdown-item" asp-area="" asp-controller="JQuery" asp-action="WhatHasChanged">Events</a>
                             </li>
-                            <li>
-                                <a class="dropdown-item" asp-area="" asp-controller="JQuery" asp-action="Steps">Wizard</a>
-                            </li>
+
                         </ul>
                     </li>
 
