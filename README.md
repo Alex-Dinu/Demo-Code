@@ -96,7 +96,7 @@ This demonstrates a simple AJAX call to get some results from an API call. You c
 ## JQuery UI
 
 ### Drag\Drop
-[This](https://github.com/Alex-Dinu/Demo-Code/blob/master/WebUi/Views/JQueryUI/ShopList.cshtml) code demonstrates the drag\drop features and how to maage JSON data.
+[This](https://github.com/Alex-Dinu/Demo-Code/blob/master/WebUi/Views/JQueryUI/ShopList.cshtml) code demonstrates the drag\drop features, JQuery data and and how to maage JSON data.
 
 ## TODO
 The following section lists additional code I want to add to the solution.
