@@ -14,13 +14,44 @@
         $(document).ready(function () {
             var data = { items: [] };
 
+            // Get the inventory and handle the promises.
+            var inventory = $.getJSON('/data/inventoryItems.json',
+                    function() {
+                        console.log('Got the data.');
+                    })
+                .done(function(response) {
+                    // build the UI.
+                    console.log('response=' + response);
+                    console.log('response.items=' + response.items);
+                    var shoppingItemsContainer = $('#shoppingItems');
+                    shoppingItemsContainer.empty();
+
+                    $.each(response.items,
+                        function (i, inventoryItem) {
+                            var $element = $(generateUiItem(inventoryItem.item,
+                                inventoryItem.price,
+                                inventoryItem.color));
+
+                            shoppingItemsContainer.append($element);
+                            $element.draggable();
+                        });
+
+                })
+                .fail(function() {
+                    alert('Something went wrong getting the inventory : ' + inventory.statusText);
+                });
+
+
+            function generateUiItem(item, price, color) {
+                return '<div id="' + item + '" data-price="' + price + '"><div style="background-color:' + color + ';width:100px; height: 50px;border:solid;padding-bottom:3px" id="drag">' + item + '</div></div>';
+            }
+
 
 
             $('#pay').on('click', function () {
                 makePayment();
             });
 
-            $("li").draggable();
 
 
             $("#droppable").droppable({
@@ -54,18 +85,19 @@
 </head>
 <body>
 <article>
-    This page demonstrates the usage of JQuery UI classes, specifically the drag and drop features.<br />
-    Select an item and drop it into the shopping cart. This action will update JSON data variable with the item and price.<br />
-    When done, click the [Complete Shopping] button to get the receipt.
+    This page demonstrates the usage of a few things:<br />
+        - JQuery UI Drag\Drop<br />
+        - $.getJSON which will get the data to build the UI element<br />
+        - $.append the UI element and set it as draggable<br />
+    <br />
+    Drag and drop an item into the shopping cart. This action will update JSON data variable with the item and price.<br />
+    When done, click the [Complete Shopping] button to print the receipt.
 </article>
+<p>
 
-    <ul id="shoppingItems">
-        <li id="bread" data-price="1.49"><div style="background-color:beige;width:100px; height: 50px;" id="drag">Bread</div></li>
-        <li id="milk" data-price="2.99"><div style="background-color:white;width:100px; height: 50px;" id="drag">Milk</div></li>
-        <li id="eggs" data-price="0.79"><div style="background-color:cornsilk;width:100px; height: 50px;" id="drag">Eggs</div></li>
-        <li id="ice cream" data-price="5.99"><div style="background-color:indianred;width:100px; height: 50px;" id="drag">Ice Cream</div></li>
-        <li id="orange juice" data-price="3.79"><div style="background-color:darkorange;width:100px; height: 50px;" id="drag">Orange Juice</div></li>
-    </ul>
+</p>
+    <div id="shoppingItems">
+    </div>
     <p></p>
     <div id="droppable">
         <p style="background-color: azure;border:double;width:700px; height: 300px;">Shopping cart</p>
@@ -81,8 +113,6 @@
         <table>
             <thead>
                 <tr>
-                    <!--<th>Item</th>
-                    <th>Price</th>-->
                 </tr>
             </thead>
             <tbody></tbody>
