@@ -93,6 +93,11 @@ The first parameter is the action an the second is the controller.
 ### AJAX calls
 This demonstrates a simple AJAX call to get some results from an API call. You can look at the code [here](https://github.com/Alex-Dinu/Demo-Code/blob/master/WebUi/Views/Address/Create.cshtml) and see it in action by running the site and selecting AJAX from the JQUery menu.
 
+## JQuery UI
+
+### Drag\Drop
+[This](https://github.com/Alex-Dinu/Demo-Code/blob/master/WebUi/Views/JQueryUI/ShopList.cshtml) code demonstrates the drag\drop features, JQuery data and and how to maage JSON data.
+
 ## TODO
 The following section lists additional code I want to add to the solution.
 - [Role authorization](https://docs.microsoft.com/en-us/aspnet/core/mvc/views/tag-helpers/authoring?view=aspnetcore-2.2)
