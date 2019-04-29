@@ -60,7 +60,10 @@
 
 <p></p>
 <p>
-    This part demonstrates performing the generation of the auto-complete values on the server.
+    This part demonstrates performing the generation of the auto-complete values on the server.<br />
+    We do it in two different ways: <br />
+    1. We perform the autocomplete on the server using AJAX calls without promises<br />
+    2. We use JQuery UI's autocomplete function after we pre-populated the list in the UI using an AJAX and we also make use of promises.
 </p>
 
         <div id="viewContent">
@@ -79,25 +82,26 @@
 <script>
 
     var states;
-    $(document).ready(function () {
+    $(document).ready(function() {
 
 
         // This pre-populates a variable that will contain all possible auto-complete value.
         $.ajax({
-            type: "GET",
-            url: '@Url.Action("GetJQueryStates", "AutoComplete")',
-            dataType: "html",
-            success: function (result) {
+                type: "GET",
+                url: '@Url.Action("GetJQueryStates", "AutoComplete")',
+                dataType: "html"
+            })
+            .done(function(result) {
                 states = result.split(",");
 
                 $('#myStates').autocomplete({
                     source: states
                 });
-            },
-            error: function (xhr, status, error) {
+            })
+            .fail(function(xhr, status, error) {
                 alert(xhr + " " + status + " " + error);
-            }
-        });
+            });
+    
 
 
         // The code below handles the MVC autocomplete.
