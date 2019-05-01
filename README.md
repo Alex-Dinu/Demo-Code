@@ -8,14 +8,14 @@ It is built in modules, so it does not implement any architecture design ot prin
 
 	[Architecture](#architecture)
 	
-	
+[SOLID Principles](#solid)	
 ## Technologies and tools <a name="TechAndTools"></a>
 ### Architecture <a name="architecture"></a>
 Although the solution is not strictly [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html), it does implement the basic principles. I did take some shortcuts in order to make it easier to follow the code and try it out. One of the rules of CA is a strict direction of data flow and to use interfaces when communicating the opposite direction.
 
 One way to implement these rules, is to use 3rd prty packages that reduce the amount of code you have to write. An example of such a package is documented below (Automapper).
 
-## SOLID Principles
+## SOLID Principles <a name="solid"></a>
 ### Single Responsibility Principle
 Each software module should have only one reason to change.
 
