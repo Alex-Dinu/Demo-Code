@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test.IntergationTests", "Te
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test.UnitTests", "Test.UnitTests\Test.UnitTests.csproj", "{6CFBB914-E5C9-443A-A0E6-5CC78F45360A}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetCoreAsync", "NetCoreAsync\NetCoreAsync.csproj", "{CAC785C0-143E-4D2B-9BA7-1760D74CC0CF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{6CFBB914-E5C9-443A-A0E6-5CC78F45360A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6CFBB914-E5C9-443A-A0E6-5CC78F45360A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6CFBB914-E5C9-443A-A0E6-5CC78F45360A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CAC785C0-143E-4D2B-9BA7-1760D74CC0CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CAC785C0-143E-4D2B-9BA7-1760D74CC0CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CAC785C0-143E-4D2B-9BA7-1760D74CC0CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CAC785C0-143E-4D2B-9BA7-1760D74CC0CF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
