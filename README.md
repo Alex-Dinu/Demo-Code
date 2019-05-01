@@ -8,12 +8,36 @@ It is built in modules, so it does not implement any architecture design ot prin
 	1. [Clean Architecture](#architecture)
 	2. [SOLID Principles](#solid)	
 		1. [Single Responsibility Principle](#srp)
-		2. [Open Closed Principle] (#ocp)
+		2. [Open Closed Principle](#ocp)
 		3. [Liskov Substitution Principle](#lsp)
 		4. [Interface Segregation Principle](#isp)
 		5. [Dependency Inversion Principle](#dip)
 	3. [Async](#async)
+2. [.NET Core](#netcore)
+	1. [Tools and packages](#tools)
+		1. [Logger](#logger) 
+		2. [Entity Framework Core](#efc)
+		3. [Automapper](#automapper)
+		4. [XUnit](#xunit)
+		5. [Swashbuckle](#swashbuckle)
+3. [MVC](#mvc)
+	1. [Middleware](#middleware)
+		1 [Request\Response logger](#reqres)
+		2 [Unhandled Exception middleware](#ex)
+	2. [Responses](#res)
+		1. [Return types](#rettype)
+	3. [Validators](#validators)
+		1. [Custom Validators](#customvalidators)
+		2. [Remote Validations](3remotevalidations)
+4. [JQuery](#jquery)
+	1. [Closures](#closures)
+	2. [Promises](#promises)
+	3. [AJAX calls](#ajax)
+5. [JQuery UI](#jqueryui)
+	1. [Drag\Drop](#dragdrop)
+6. [TODO](#todo)
 
+	
 	
 ## Technologies and tools <a name="TechAndTools"></a>
 ### Clean Architecture <a name="architecture"></a>
@@ -65,9 +89,9 @@ Uncomment each PrepareBreakfast call to see the execution.
 - async.PrepareBreakfast2() groups together related methods to make the code more readable.
 - async.PrepareBreakfast3() adds the WhenAll functionality to improve the readbility and async controll better.
 
-## .NET Core
-### Tools and packages
-#### Logger
+## .NET Core <a name="netcore"></a>
+### Tools and packages <a name="tools"></a>
+#### Logger <a name="logger"></a>
 Microsoft introduced ILogger to help us log information. There are numerous other 3rd party packages that extend ILOgger and add additional functionality. I use [Serilog](https://serilog.net/) in order to help me log information and errors in JSON format in a daily rolling file with a max size.
 
 The Infrastructure.Log project does it all. It is referenced by each project that requires to log something. I set up some properties in Startup.cs in a private AddSerilogServices() method. We are also loading the class as scoped. The reason being is that it also generates a unique ID for each http request, so when we log the events and errors, we can easily search by the ID and order by the date so we can see a complete picture of a specific request. You can vew the code [here](https://github.com/Alex-Dinu/Demo-Code/blob/master/Infrastructure.Log/DataLogger.cs).
@@ -83,7 +107,7 @@ Notice that we are sending a parameter type to the logger methods. This allows u
 
     void LogError(Exception ex, params object[] data);
 
-#### Entity Framework Core
+#### Entity Framework Core <a name="efc"></a>
 Being a .NETCore solution, EFCore is being used. While most of the demos do not require a database, some calls under the EFCore menu item do, so you would need to perform the following steps:
 
  1. Install the Wide World Importers database
@@ -91,36 +115,36 @@ Being a .NETCore solution, EFCore is being used. While most of the demos do not 
 2. Compile the application stored procedures in Infrastructure.Database.SQL.StoredProcedures
 3. Update the EFCore connection string in the appsettings file.
 
-#### AutoMapper
+#### AutoMapper <a name="automapper"></a>
 [AutoMapper](http://automapper.org/) is a library I use to map the different data objects that are passed between the different layers in Clean Architecture solution.
 Mapper rules are setup in [WebUi.Shared.DataMapper class](https://github.com/Alex-Dinu/Demo-Code/blob/master/WebUi/Shared/DataMapper.cs) and is added as a service in Startup.cs.
 
-#### XUnit
+#### XUnit <a name="xunit"></a>
 I use XUnit to run my tests. It has a few nice features:
 - Useage of constructors instead of initializers
 - [Test fixtures](https://github.com/Alex-Dinu/Demo-Code/blob/master/Test.IntergationTests/TextFixtures/TestClientFixture.cs) that are loaded once and used in every test
 - Pass in data as parameters to test cases that will allow you to run the same test with multiple data elements. You can see this in this [test](https://github.com/Alex-Dinu/Demo-Code/blob/master/Test.IntergationTests/OrderTests/GetOrderTests.cs). OrderAuthorizationTests() expects two classes that will return the parameters the test method requires.
 - Will start an Http Client based on the startup settings.
 
-#### Swashbuckle
+#### Swashbuckle <a name="swashbuckle"></a>
 This package automatically generates json and a UI representation of your services. You can expand it by adding .NET XML documentation to the properties and methods and creating test data for the models. All the settings are in one [class](https://github.com/Alex-Dinu/Demo-Code/blob/master/WebUi/Shared/SwaggerServiceExtension.cs) that is referenced in the startup class. You can also document [sample data](https://github.com/Alex-Dinu/Demo-Code/blob/master/WebUi/Services/Orders/ClientOrderServiceResponseModel.cs)
 
 To get the JSON code that can be used to communicate with consumers, add the following to the end of the home URL: /swagger/v1.0/swagger.json e.g. http://localhost:62681/swagger/v1.0/swagger.json
 
 To view the UI, add the following to the end of the home URL: /swagger/index.html e.g. http://localhost:62681/swagger/index.html
 
-## MVC/API
-### Middleware
+## MVC/API <a name="mvc"></a>
+### Middleware <a name="middleware"></a>
 We use [middleware](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/middleware/?view=aspnetcore-2.2) to manage the request pipeline. Any classes that the middleware require need to be added to the container in Startup.cs and we need to also add the middleware to the application also in Startup.Configure() method.
-#### Request\Response logger
+#### Request\Response logger <a name="reqres"></a>
 This middleware automatically logs the request values and the response, It can be found [here](https://github.com/Alex-Dinu/Demo-Code/blob/master/WebUi/Middleware/RequestResponseLoggingMiddleware.cs)
-#### Unhandled Exception middleware
+#### Unhandled Exception middleware <a name="ex"></a>
 This [middleware](https://github.com/Alex-Dinu/Demo-Code/blob/master/WebUi/Middleware/UnhandledExceptionHandlerMiddleware.cs) will catch any unhandled exceptions, build a custom response and return it so we won't return any secure information just in case someone missed a try\catch.
-### Responses
-#### Return types
+### Responses <a name="responses"></a>
+#### Return types <a name="rettype"></a>
 We can now explicitly return the type of the action. In the past, we used to return ActionResult, but now we can explicitly say what the type is, e.g. Task<ActionResult<CustomerSearchMvcResponseModel>>.
-### Validators	
-#### Custom Validators
+### Validators <a name="validators"></a>
+#### Custom Validators <a name="customvalidators"></a>
 I added a custom validator attribute to showcase how we can pass the existing property we need to validate and anotherproperty value into the validator. The validator code can be found [here](https://github.com/Alex-Dinu/Demo-Code/blob/master/WebUi/CustomValidatorAttributes/ValidLogonAttribute.cs) and is used as follows:
 
         [DisplayName("Preferred Name")]
@@ -130,7 +154,7 @@ I added a custom validator attribute to showcase how we can pass the existing pr
         public string LogonName { get; set; }
 	
 As you can see, we are validating the LogonName against the PreferredName. 
-#### Remote Validations
+#### Remote Validations <a name="remotevalidations"></a>
 [Remote validations](https://docs.microsoft.com/en-us/aspnet/core/mvc/models/validation?view=aspnetcore-2.2#remote-attribute) perform an asynchronous call to the server to perform a validation while the client continues to fill out the form. For example, if an email address has to be unique, once they tab away from the input, and continue to fill out the form, an AJAX call is made to make sure the field is not already in use.
 The validation code can be found [here](https://github.com/Alex-Dinu/Demo-Code/blob/master/WebUi/Controllers/CustomerSearchController.cs) at the end in the PhoneNumberIsUnique() method and is setup as an attribute on the property:
 
@@ -139,23 +163,23 @@ The validation code can be found [here](https://github.com/Alex-Dinu/Demo-Code/b
 	
 The first parameter is the action an the second is the controller.
 
-## JQuery
+## JQuery <a name="jquery"></a>
 
-### Closures
+### Closures <a name="closures"></a>
 [This](https://github.com/Alex-Dinu/Demo-Code/blob/master/WebUi/Views/Closures/Index.cshtml) is the source code. You can see it in action by running the site and selecting Closures from the JQUery menu.
 
-### Promises
+### Promises <a name="promises"></a>
 [This](https://github.com/Alex-Dinu/Demo-Code/blob/master/WebUi/Views/Promises/Index.cshtml) is the source code. You can see it in action by running the site and selecting Promises from the JQUery menu.
 
-### AJAX calls
+### AJAX calls <a name="ajax"></a>
 This demonstrates a simple AJAX call to get some results from an API call. You can look at the code [here](https://github.com/Alex-Dinu/Demo-Code/blob/master/WebUi/Views/Address/Create.cshtml) and see it in action by running the site and selecting AJAX from the JQUery menu.
 
-## JQuery UI
+## JQuery UI <a name="jqueryui"></a>
 
-### Drag\Drop
-[This](https://github.com/Alex-Dinu/Demo-Code/blob/master/WebUi/Views/JQueryUI/ShopList.cshtml) code demonstrates the drag\drop features, JQuery data and and how to maage JSON data.
+### Drag\Drop <a name="dragdrop"></a>
+[This](https://github.com/Alex-Dinu/Demo-Code/blob/master/WebUi/Views/JQueryUI/ShopList.cshtml) code demonstrates the drag\drop features, append, JQuery data and and how to manage JSON data.
 
-## TODO
+## TODO  <a name="todo"></a>
 The following section lists additional code I want to add to the solution.
 - [Role authorization](https://docs.microsoft.com/en-us/aspnet/core/mvc/views/tag-helpers/authoring?view=aspnetcore-2.2)
 - [Fluent validations](https://fluentvalidation.net/)
