@@ -8,6 +8,15 @@ It is built in modules, so it does not implement any architecture design ot prin
 Although the solution is not strictly [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html), it does implement the basic principles. I did take some shortcuts in order to make it easier to follow the code and try it out. One of the rules of CA is a strict direction of data flow and to use interfaces when communicating the opposite direction.
 
 One way to implement these rules, is to use 3rd prty packages that reduce the amount of code you have to write. An example of such a package is documented below (Automapper).
+### Async
+To view the code and execution, make the [NetCoreAsync](https://github.com/Alex-Dinu/Demo-Code/tree/master/NetCoreAsync) project as the startup project. It uses a simple breakfast preparation steps to illustrate how async helps you prepare it faster and how it helps the code be more scalabale.
+
+In Program.cs, you will see the natural regression from non-async code to an async code:
+Uncomment each PrepareBreakfast call to see the execution.
+sync.PrepareBrakfast() is a non-async call. 
+async.PrepareBreakfast() shows you how to convert the non-async code into async code.
+async.PrepareBreakfast2() groups together related methods to make the code more readable.
+async.PrepareBreakfast3() adds the WhenAll functionality to improve the readbility and async controll better.
 
 ## .NET Core
 ### Tools and packages
