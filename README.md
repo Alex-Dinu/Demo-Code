@@ -1,6 +1,7 @@
 # Demo Code
 
 The purpose of this repository is to showcase various tools, development principles, solution architecture and the usage of 3rd party tools that demonstrate my experience. This demo code solution uses .NETCore 2.2.
+It is built in modules, so it does not implement any architecture design ot principle.
 
 ## Technologies and tools
 ### Architecture
