@@ -4,8 +4,8 @@ The purpose of this repository is to showcase various tools, development princip
 It is built in modules, so it does not implement any architecture design ot principle.
 
 # Table of Contents
-Technologies and tools(#TechAndTools)
-	Architecture(#architecture)
+[Technologies and tools](#TechAndTools)
+	[Architecture](#architecture)
 	
 	
 ## Technologies and tools <a name="TechAndTools"></a>
