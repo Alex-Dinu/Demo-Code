@@ -13,10 +13,10 @@ To view the code and execution, make the [NetCoreAsync](https://github.com/Alex-
 
 In Program.cs, you will see the natural regression from non-async code to an async code:
 Uncomment each PrepareBreakfast call to see the execution.
-> sync.PrepareBrakfast() is a non-async call. 
-> async.PrepareBreakfast() shows you how to convert the non-async code into async code.
-> async.PrepareBreakfast2() groups together related methods to make the code more readable.
-> async.PrepareBreakfast3() adds the WhenAll functionality to improve the readbility and async controll better.
+- sync.PrepareBrakfast() is a non-async call. 
+- async.PrepareBreakfast() shows you how to convert the non-async code into async code.
+- async.PrepareBreakfast2() groups together related methods to make the code more readable.
+- async.PrepareBreakfast3() adds the WhenAll functionality to improve the readbility and async controll better.
 
 ## .NET Core
 ### Tools and packages
