@@ -8,6 +8,41 @@ It is built in modules, so it does not implement any architecture design ot prin
 Although the solution is not strictly [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html), it does implement the basic principles. I did take some shortcuts in order to make it easier to follow the code and try it out. One of the rules of CA is a strict direction of data flow and to use interfaces when communicating the opposite direction.
 
 One way to implement these rules, is to use 3rd prty packages that reduce the amount of code you have to write. An example of such a package is documented below (Automapper).
+
+## SOLID Principles
+### Single Responsibility Principle
+Each software module should have only one reason to change.
+
+[This](https://github.com/Alex-Dinu/Demo-Code/blob/master/SOLID/SingleResponsibilityPrincipleStart.cs) link demonstrates the smell and this [link](https://github.com/Alex-Dinu/Demo-Code/blob/master/SOLID/SingleResponsibilityPrincipleEnd.cs) demonstrates the fix.
+### Open Closed Principle
+Software entities should be open for extension, but closed for modification
+
+There are at least three wyas to resolve the OPC:
+
+1. [Using parameters](https://github.com/Alex-Dinu/Demo-Code/blob/master/SOLID/OpenClosedPrincipleEndOption1.cs).
+2. [Virtual methods](https://github.com/Alex-Dinu/Demo-Code/blob/master/SOLID/OpenClosedPrincipleEndOption2.cs).
+3. [Factories](https://github.com/Alex-Dinu/Demo-Code/blob/master/SOLID/OpenClosedPrincipleEndOption3.cs). This option can be expanded to use interfaces instead of abstract classes and reflection to eliminate the conditional code.
+
+### Liskov Substitution Principle
+Subtypes must be substitutable for their base types
+
+There are at least three [smells](https://github.com/Alex-Dinu/Demo-Code/blob/master/SOLID/LiskovSubstitutionPrincipleStart.cs) that can be used to identify when we break LSP:
+1. The need to check the type,
+2. The need to check for nulls,
+3. We don't implement the whole contract and require to throw a NotImplementedException.
+
+The forst two break the Tell, Don't Ask Principle. This [link](https://github.com/Alex-Dinu/Demo-Code/blob/master/SOLID/LiskovSubstitutionPrincipleEnd.cs) shows some possible fixes.
+
+### Interface Segregation Principle
+Clients should not be forced to depend on methods they do not use.
+
+Closely related to LSP, [this](https://github.com/Alex-Dinu/Demo-Code/blob/master/SOLID/InterfaceSegregationPrincipleStart.cs) code adds another smell that breaks ISP. And here is a possible [fix](https://github.com/Alex-Dinu/Demo-Code/blob/master/SOLID/InterfaceSegregationPrincipleEnd.cs).
+
+### Dependency Inversion Principle
+High-level modules should not depend on low-level modules. Both should depend on abstractions. Abstractions should not depend on details. Details should depend on abstractions.
+
+[This code](https://github.com/Alex-Dinu/Demo-Code/blob/master/SOLID/DependencyInjectionPrincipleStart.cs) shows us the problem. and a possible [solution](https://github.com/Alex-Dinu/Demo-Code/blob/master/SOLID/DependencyInjectionPrincipleEnd.cs). One thing to note, .NET Core has a built-in IoC(Inversion of Control) container for us to use.
+
 ### Async
 To view the code and execution, make the [NetCoreAsync](https://github.com/Alex-Dinu/Demo-Code/tree/master/NetCoreAsync) project as the startup project. It uses a simple breakfast preparation steps to illustrate how async helps you prepare it faster and how it helps the code be more scalabale.
 
