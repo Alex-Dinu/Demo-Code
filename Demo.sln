@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test.UnitTests", "Test.Unit
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetCoreAsync", "NetCoreAsync\NetCoreAsync.csproj", "{CAC785C0-143E-4D2B-9BA7-1760D74CC0CF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SOLID", "SOLID\SOLID.csproj", "{BC663BE5-8F51-491E-8822-77E9833F96BE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{CAC785C0-143E-4D2B-9BA7-1760D74CC0CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CAC785C0-143E-4D2B-9BA7-1760D74CC0CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CAC785C0-143E-4D2B-9BA7-1760D74CC0CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC663BE5-8F51-491E-8822-77E9833F96BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC663BE5-8F51-491E-8822-77E9833F96BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC663BE5-8F51-491E-8822-77E9833F96BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC663BE5-8F51-491E-8822-77E9833F96BE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
