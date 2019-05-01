@@ -5,21 +5,28 @@ It is built in modules, so it does not implement any architecture design ot prin
 
 # Table of Contents
 1. [Technologies and tools](#TechAndTools)
-	1. [Architecture](#architecture)
-2. [SOLID Principles](#solid)	
-	1. [Single Responsibility Principle](#srp)
+	1. [Clean Architecture](#architecture)
+	2. [SOLID Principles](#solid)	
+		1. [Single Responsibility Principle](#srp)
+		2. [Open Closed Principle] (#ocp)
+		3. [Liskov Substitution Principle](#lsp)
+		4. [Interface Segregation Principle](#isp)
+		5. [Dependency Inversion Principle](#dip)
+	3. [Async](#async)
+
+	
 ## Technologies and tools <a name="TechAndTools"></a>
-### Architecture <a name="architecture"></a>
+### Clean Architecture <a name="architecture"></a>
 Although the solution is not strictly [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html), it does implement the basic principles. I did take some shortcuts in order to make it easier to follow the code and try it out. One of the rules of CA is a strict direction of data flow and to use interfaces when communicating the opposite direction.
 
 One way to implement these rules, is to use 3rd prty packages that reduce the amount of code you have to write. An example of such a package is documented below (Automapper).
 
-## SOLID Principles <a name="solid"></a>
-### Single Responsibility Principle <a name="srp"></a>
+### SOLID Principles <a name="solid"></a>
+#### Single Responsibility Principle <a name="srp"></a>
 Each software module should have only one reason to change.
 
 [This](https://github.com/Alex-Dinu/Demo-Code/blob/master/SOLID/SingleResponsibilityPrincipleStart.cs) link demonstrates the smell and this [link](https://github.com/Alex-Dinu/Demo-Code/blob/master/SOLID/SingleResponsibilityPrincipleEnd.cs) demonstrates the fix.
-### Open Closed Principle
+#### Open Closed Principle <a name="ocp"></a>
 Software entities should be open for extension, but closed for modification
 
 There are at least three wyas to resolve the OPC:
@@ -28,7 +35,7 @@ There are at least three wyas to resolve the OPC:
 2. [Virtual methods](https://github.com/Alex-Dinu/Demo-Code/blob/master/SOLID/OpenClosedPrincipleEndOption2.cs).
 3. [Factories](https://github.com/Alex-Dinu/Demo-Code/blob/master/SOLID/OpenClosedPrincipleEndOption3.cs). This option can be expanded to use interfaces instead of abstract classes and reflection to eliminate the conditional code.
 
-### Liskov Substitution Principle
+#### Liskov Substitution Principle <a name="lsp"></a>
 Subtypes must be substitutable for their base types
 
 There are at least three [smells](https://github.com/Alex-Dinu/Demo-Code/blob/master/SOLID/LiskovSubstitutionPrincipleStart.cs) that can be used to identify when we break LSP:
@@ -38,17 +45,17 @@ There are at least three [smells](https://github.com/Alex-Dinu/Demo-Code/blob/ma
 
 The forst two break the Tell, Don't Ask Principle. This [link](https://github.com/Alex-Dinu/Demo-Code/blob/master/SOLID/LiskovSubstitutionPrincipleEnd.cs) shows some possible fixes.
 
-### Interface Segregation Principle
+#### Interface Segregation Principle <a name="isp"></a>
 Clients should not be forced to depend on methods they do not use.
 
 Closely related to LSP, [this](https://github.com/Alex-Dinu/Demo-Code/blob/master/SOLID/InterfaceSegregationPrincipleStart.cs) code adds another smell that breaks ISP. And here is a possible [fix](https://github.com/Alex-Dinu/Demo-Code/blob/master/SOLID/InterfaceSegregationPrincipleEnd.cs).
 
-### Dependency Inversion Principle
+#### Dependency Inversion Principle <a name="dip"></a>
 High-level modules should not depend on low-level modules. Both should depend on abstractions. Abstractions should not depend on details. Details should depend on abstractions.
 
 [This code](https://github.com/Alex-Dinu/Demo-Code/blob/master/SOLID/DependencyInjectionPrincipleStart.cs) shows us the problem. and a possible [solution](https://github.com/Alex-Dinu/Demo-Code/blob/master/SOLID/DependencyInjectionPrincipleEnd.cs). One thing to note, .NET Core has a built-in IoC(Inversion of Control) container for us to use.
 
-### Async
+### Async <a name="async"></a>
 To view the code and execution, make the [NetCoreAsync](https://github.com/Alex-Dinu/Demo-Code/tree/master/NetCoreAsync) project as the startup project. It uses a simple breakfast preparation steps to illustrate how async helps you prepare it faster and how it helps the code be more scalabale.
 
 In Program.cs, you will see the natural regression from non-async code to an async code:
