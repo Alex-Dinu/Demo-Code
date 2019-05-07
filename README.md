@@ -20,6 +20,7 @@ It is built in modules, so it does not implement any architecture design ot prin
 		3. [Automapper](#automapper)
 		4. [XUnit](#xunit)
 		5. [Swashbuckle](#swashbuckle)
+		6. [MiniProfiler](#miniprofiler)
 3. [MVC](#mvc)
 	1. [Middleware](#middleware)
 		1. [Request\Response logger](#reqres)
