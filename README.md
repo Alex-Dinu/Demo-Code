@@ -134,7 +134,8 @@ To get the JSON code that can be used to communicate with consumers, add the fol
 
 To view the UI, add the following to the end of the home URL: /swagger/index.html e.g. http://localhost:62681/swagger/index.html
 
-#### MiniProfiler <a name="miniprofiler"></a>
+<a name="miniprofiler"></a> 
+#### MiniProfiler 
 MiniProfiler helps us log performance counters to better detect any performance issues. It's a configurable set of functions that display data on an MVC page, store data in a database, implements role security and hooks into Http and EF Core calls to supply additional details like the SQL statement or Http details.
 
 Once you install the related Nuget packages and configure them in the Startup, all you need to do is add it to the [UI](https://github.com/Alex-Dinu/Demo-Code/blob/master/WebUi/Views/ExchangeRate/Index.cshtml). You can see the output from the Misc\MiniProfiler menu.
