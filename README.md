@@ -111,7 +111,7 @@ Notice that we are sending a parameter type to the logger methods. This allows u
 Being a .NETCore solution, EFCore is being used. While most of the demos do not require a database, some calls under the EFCore menu item do, so you would need to perform the following steps:
 
  1. Install the Wide World Importers database
-	1.1 Download the [**WideWorldImporters-Standard.bak**](https://github.com/Microsoft/sql-server-samples/releases/download/wide-world-importers-v1.0/WideWorldImporters-Standard.bak) backup database in order to restore it from this [site](https://github.com/Microsoft/sql-server-samples/releases/tag/wide-world-importers-v1.0).
+	1. Download the [**WideWorldImporters-Standard.bak**](https://github.com/Microsoft/sql-server-samples/releases/download/wide-world-importers-v1.0/WideWorldImporters-Standard.bak) backup database in order to restore it from this [site](https://github.com/Microsoft/sql-server-samples/releases/tag/wide-world-importers-v1.0).
 2. Compile the application stored procedures in Infrastructure.Database.SQL.StoredProcedures
 3. Update the EFCore connection string in the appsettings file.
 
@@ -132,6 +132,11 @@ This package automatically generates json and a UI representation of your servic
 To get the JSON code that can be used to communicate with consumers, add the following to the end of the home URL: /swagger/v1.0/swagger.json e.g. http://localhost:62681/swagger/v1.0/swagger.json
 
 To view the UI, add the following to the end of the home URL: /swagger/index.html e.g. http://localhost:62681/swagger/index.html
+
+#### MiniProfiler <a name="miniprofiler"></a>
+MiniProfiler helps us log performance counters to better detect any performance issues. It's a configurable set of functions that display data on an MVC page, store data in a database, implements role security and hooks into Http and EF Core calls to supply additional details like the SQL statement or Http details.
+
+Once you install the related Nuget packages and configure them in the Startup, all you need to do is add it to the [UI](https://github.com/Alex-Dinu/Demo-Code/blob/master/WebUi/Views/ExchangeRate/Index.cshtml). You can see the output from the Misc\MiniProfiler menu.
 
 ## MVC/API <a name="mvc"></a>
 ### Middleware <a name="middleware"></a>
