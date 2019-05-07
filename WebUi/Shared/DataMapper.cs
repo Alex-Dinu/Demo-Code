@@ -1,4 +1,5 @@
-﻿using Application.UseCases.GetClientOrders;
+﻿using Application.UseCases.ExchangeRates;
+using Application.UseCases.GetClientOrders;
 using Application.UseCases.GetOrder;
 using Application.UseCases.SearchCustomerByName;
 using AutoMapper;
@@ -29,6 +30,9 @@ namespace WebUi.Shared
 
             CreateMap<ClientOrderApplicationResponseModel, OrderMvcResponseListModel > ();
             CreateMap<OrderApplicationResponseModel, OrderMvcResponseModel > ();
+
+            CreateMap<ExchangeRateApplicationResponseModel, ExchangeRateMvcResponseModel>();
+
 
         }
 

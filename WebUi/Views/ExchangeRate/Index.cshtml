@@ -1,0 +1,14 @@
+﻿@model ExchangeRateMvcResponseModel
+@{
+    ViewData["Title"] = "View";
+}
+
+<h1>US-GB Exchange Rate</h1>
+
+<label asp-for="ExchangeRateDate" class="control-label"></label> @Model.ExchangeRateDate <br />
+<label asp-for="USD" class="control-label"></label> @Model.USD <br />
+<label asp-for="GBP" class="control-label"></label> @Model.GBP <br />
+
+
+<mini-profiler />
+

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Application.Shared;
+using Application.UseCases.ExchangeRates;
 using Application.UseCases.GetClientOrders;
 using Application.UseCases.GetOrder;
 using Application.UseCases.GetSomeData;
@@ -81,9 +82,22 @@ namespace WebUi
             services.AddTransient<IExceptionResponse, ExceptionResponse>();
 
             services.AddTransient<ISomeDataGetter, SomeDataGetter>();
+
+
+            services.AddTransient<IExchangeRateApi, ExchangeRateApi>();
+
+
             AddSerilogServices(services);
 
             services.AddSwaggerDocumentation();
+
+            // Miniprofiler.
+            services.AddMiniProfiler(options =>
+                {
+                    options.PopupRenderPosition = StackExchange.Profiling.RenderPosition.BottomLeft;
+                    options.PopupShowTimeWithChildren = true;
+                })
+                .AddEntityFramework();
         }
 
         private void AddSerilogServices(IServiceCollection services)
@@ -123,6 +137,9 @@ namespace WebUi
             app.UseCookiePolicy();
 
             AddMiddlewareApplications(app);
+
+            // Miniprofiler > before UseMVC!!!!!
+            app.UseMiniProfiler();
 
             app.UseMvc(routes =>
             {
